@@ -213,6 +213,11 @@
     }
   }
 
+  .track-row:has(:focus-visible) .btn-remove-track {
+    @apply text-red-400;
+  }
+
+  .track-row:has(:focus-visible) .btn-remove-track,
   .track-row:hover .btn-remove-track {
     @apply opacity-100;
   }

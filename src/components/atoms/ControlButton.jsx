@@ -3,7 +3,7 @@
  * @module components/atoms/ControlButton
  */
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 /**
  * Control button atom for +/- controls
@@ -15,14 +15,14 @@ import PropTypes from 'prop-types';
  */
 export function ControlButton({ children, onClick, isPlaying = false }) {
   return (
-    <button onClick={onClick} className="btn-control" disabled={isPlaying} type="button">
+    <button onClick={onClick} className='btn-control' disabled={isPlaying} type='button'>
       {children}
     </button>
-  );
+  )
 }
 
 ControlButton.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
-  isPlaying: PropTypes.bool,
-};
+  isPlaying: PropTypes.bool
+}

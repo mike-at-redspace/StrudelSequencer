@@ -3,12 +3,12 @@
  * @module components/organisms/SequencerGrid
  */
 
-import { useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
-import { Plus, Trash2 } from 'lucide-react';
-import { StepCell } from '../atoms/StepCell.jsx';
-import { CONSTANTS } from '../../types/constants.js';
+import { useMemo, useCallback } from 'react'
+import PropTypes from 'prop-types'
+import { motion } from 'framer-motion'
+import { Plus, Trash2 } from 'lucide-react'
+import { StepCell } from '../atoms/StepCell.jsx'
+import { CONSTANTS } from '../../types/constants.js'
 
 /**
  * Sequencer grid organism component
@@ -35,85 +35,85 @@ export function SequencerGrid({
   onCellClick,
   onAddTrack,
   onRemoveTrack,
-  scrollContainerRef,
+  scrollContainerRef
 }) {
   const handleCellClick = useCallback(
     (rowIndex, stepIndex) => {
-      onCellClick(rowIndex, stepIndex);
+      onCellClick(rowIndex, stepIndex)
     },
     [onCellClick]
-  );
+  )
 
   const createCellClickHandler = useCallback(
     (rowIndex, stepIndex) => {
-      return () => handleCellClick(rowIndex, stepIndex);
+      return () => handleCellClick(rowIndex, stepIndex)
     },
     [handleCellClick]
-  );
+  )
 
   // Memoize handlers map - only recreate when grid structure changes
   const clickHandlers = useMemo(() => {
-    const handlers = new Map();
+    const handlers = new Map()
     grid.forEach((row, rowIndex) => {
       row.forEach((_, stepIndex) => {
-        const key = `${rowIndex}-${stepIndex}`;
-        handlers.set(key, createCellClickHandler(rowIndex, stepIndex));
-      });
-    });
-    return handlers;
-  }, [grid, createCellClickHandler]);
+        const key = `${rowIndex}-${stepIndex}`
+        handlers.set(key, createCellClickHandler(rowIndex, stepIndex))
+      })
+    })
+    return handlers
+  }, [grid, createCellClickHandler])
 
   // Animation variants for track rows
   const trackRowVariants = {
     initial: { opacity: 0, scale: 0.95 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.95 },
-  };
+    exit: { opacity: 0, scale: 0.95 }
+  }
 
   // Animation variants for bar containers
   const barVariants = {
     initial: { opacity: 0, scale: 0.98 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.98 },
-  };
+    exit: { opacity: 0, scale: 0.98 }
+  }
 
   // Animation variants for beat containers
   const beatVariants = {
     initial: { opacity: 0, scale: 0.98 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.98 },
-  };
+    exit: { opacity: 0, scale: 0.98 }
+  }
 
   // Animation variants for grid rows
   const gridRowVariants = {
     initial: { opacity: 0, scale: 0.95 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.95 },
-  };
+    exit: { opacity: 0, scale: 0.95 }
+  }
 
   return (
-    <div className="flex flex-1 overflow-hidden">
+    <div className='flex flex-1 overflow-hidden'>
       {/* Track controls column */}
-      <div className="track-controls">
-        <div className="track-controls-header" />
-        <div className="track-controls-content">
-          <div className="flex flex-col">
+      <div className='track-controls'>
+        <div className='track-controls-header' />
+        <div className='track-controls-content'>
+          <div className='flex flex-col'>
             {grid.map((_, rowIndex) => (
               <motion.div
                 key={rowIndex}
-                className="track-row group"
+                className='track-row group'
                 variants={trackRowVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
+                initial='initial'
+                animate='animate'
+                exit='exit'
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               >
                 <button
                   onClick={() => onRemoveTrack(rowIndex)}
-                  className="btn-remove-track"
+                  className='btn-remove-track'
                   disabled={grid.length === CONSTANTS.MIN_TRACKS}
-                  title="Remove track"
-                  type="button"
+                  title='Remove track'
+                  type='button'
                 >
                   <Trash2 size={16} />
                 </button>
@@ -121,23 +121,23 @@ export function SequencerGrid({
             ))}
 
             <motion.div
-              className="btn-add-track-container"
+              className='btn-add-track-container'
               onClick={onAddTrack}
-              role="button"
+              role='button'
               tabIndex={0}
-              onKeyDown={(e) => {
+              onKeyDown={e => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onAddTrack();
+                  e.preventDefault()
+                  e.stopPropagation()
+                  onAddTrack()
                 }
               }}
               whileTap={{ scale: 0.97 }}
             >
               <button
                 disabled={grid.length >= CONSTANTS.MAX_TRACKS}
-                className="btn-add-track"
-                type="button"
+                className='btn-add-track'
+                type='button'
               >
                 <Plus size={20} />
               </button>
@@ -147,47 +147,47 @@ export function SequencerGrid({
       </div>
 
       {/* Grid content */}
-      <div ref={scrollContainerRef} className="grid-container">
-        <div className="grid-content">
+      <div ref={scrollContainerRef} className='grid-container'>
+        <div className='grid-content'>
           {/* Header row with bar/beat markers */}
-          <div className="grid-header" style={{ position: 'sticky', top: 0, zIndex: 20 }}>
+          <div className='grid-header' style={{ position: 'sticky', top: 0, zIndex: 20 }}>
             {Array(bars)
               .fill(0)
               .map((_, barIndex) => (
                 <motion.div
                   key={barIndex}
-                  className="bar-container"
+                  className='bar-container'
                   variants={barVariants}
-                  initial="initial"
-                  animate="animate"
+                  initial='initial'
+                  animate='animate'
                   transition={{
                     delay: barIndex * 0.05,
                     type: 'spring',
                     stiffness: 500,
-                    damping: 35,
+                    damping: 35
                   }}
                 >
-                  <div className="bar-label">BAR {barIndex + 1}</div>
+                  <div className='bar-label'>BAR {barIndex + 1}</div>
                   {Array(beatsPerBar)
                     .fill(0)
                     .map((_, beatIndex) => (
                       <motion.div
                         key={beatIndex}
-                        className="beat-container"
+                        className='beat-container'
                         variants={beatVariants}
-                        initial="initial"
-                        animate="animate"
+                        initial='initial'
+                        animate='animate'
                         transition={{
                           delay: beatIndex * 0.03,
                           type: 'spring',
                           stiffness: 500,
-                          damping: 35,
+                          damping: 35
                         }}
                       >
                         {Array(CONSTANTS.STEPS_PER_BEAT)
                           .fill(0)
                           .map((_, stepIndex) => (
-                            <div key={stepIndex} className="step-marker-container">
+                            <div key={stepIndex} className='step-marker-container'>
                               <div
                                 className={`step-marker ${
                                   stepIndex === 0 ? 'step-marker-beat' : 'step-marker-sub'
@@ -205,31 +205,31 @@ export function SequencerGrid({
           {grid.map((row, rowIndex) => (
             <motion.div
               key={rowIndex}
-              className="grid-row"
+              className='grid-row'
               layout
               variants={gridRowVariants}
-              initial="initial"
-              animate="animate"
+              initial='initial'
+              animate='animate'
               transition={{ delay: rowIndex * 0.03, type: 'spring', stiffness: 500, damping: 35 }}
             >
               {Array(bars)
                 .fill(0)
                 .map((_, barIndex) => (
-                  <div key={barIndex} className="bar-cell">
+                  <div key={barIndex} className='bar-cell'>
                     {Array(beatsPerBar)
                       .fill(0)
                       .map((_, beatIndex) => (
                         <motion.div
                           key={beatIndex}
-                          className="beat-container"
+                          className='beat-container'
                           variants={beatVariants}
-                          initial="initial"
-                          animate="animate"
+                          initial='initial'
+                          animate='animate'
                           transition={{
                             delay: beatIndex * 0.02,
                             type: 'spring',
                             stiffness: 500,
-                            damping: 35,
+                            damping: 35
                           }}
                         >
                           {Array(CONSTANTS.STEPS_PER_BEAT)
@@ -238,15 +238,15 @@ export function SequencerGrid({
                               const globalStepIndex =
                                 barIndex * stepsPerBar +
                                 beatIndex * CONSTANTS.STEPS_PER_BEAT +
-                                stepIndex;
+                                stepIndex
                               if (globalStepIndex >= row.length) {
-                                return null;
+                                return null
                               }
 
-                              const cell = row[globalStepIndex];
-                              const isActive = currentStep === globalStepIndex;
-                              const handlerKey = `${rowIndex}-${globalStepIndex}`;
-                              const cellClickHandler = clickHandlers.get(handlerKey);
+                              const cell = row[globalStepIndex]
+                              const isActive = currentStep === globalStepIndex
+                              const handlerKey = `${rowIndex}-${globalStepIndex}`
+                              const cellClickHandler = clickHandlers.get(handlerKey)
 
                               return (
                                 <StepCell
@@ -257,7 +257,7 @@ export function SequencerGrid({
                                   onClick={cellClickHandler}
                                   id={rowIndex === 0 ? `step-marker-${globalStepIndex}` : undefined}
                                 />
-                              );
+                              )
                             })}
                         </motion.div>
                       ))}
@@ -268,7 +268,7 @@ export function SequencerGrid({
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 SequencerGrid.propTypes = {
@@ -281,5 +281,5 @@ SequencerGrid.propTypes = {
   onCellClick: PropTypes.func.isRequired,
   onAddTrack: PropTypes.func.isRequired,
   onRemoveTrack: PropTypes.func.isRequired,
-  scrollContainerRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-};
+  scrollContainerRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) })
+}

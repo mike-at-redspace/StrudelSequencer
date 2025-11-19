@@ -3,10 +3,10 @@
  * @module audio/helpers/sampleLoader
  */
 
-import { samples } from '@strudel/webaudio';
+import { samples } from '@strudel/webaudio'
 
 const SAMPLE_LIBRARY_URL =
-  'https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/refs/heads/master/strudel.json';
+  'https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/refs/heads/master/strudel.json'
 
 /**
  * Load the sample library from the remote URL
@@ -15,9 +15,9 @@ const SAMPLE_LIBRARY_URL =
  */
 export async function loadSampleLibrary() {
   try {
-    await samples(SAMPLE_LIBRARY_URL);
+    await samples(SAMPLE_LIBRARY_URL)
   } catch (error) {
-    console.error('Samples failed to load', error);
-    throw new Error('Failed to load sample library. Please check your internet connection.');
+    console.error('Samples failed to load', error)
+    throw new Error('Failed to load sample library. Please check your internet connection.')
   }
 }

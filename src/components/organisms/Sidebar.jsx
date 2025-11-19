@@ -3,17 +3,17 @@
  * @module components/organisms/Sidebar
  */
 
-import PropTypes from 'prop-types';
-import { Drum, Disc, Music, Zap } from 'lucide-react';
-import { SAMPLE_CATEGORIES } from '../../types/constants.js';
-import { SampleButton } from '../molecules/SampleButton.jsx';
+import PropTypes from 'prop-types'
+import { Drum, Disc, Music, Zap } from 'lucide-react'
+import { SAMPLE_CATEGORIES } from '../../types/constants.js'
+import { SampleButton } from '../molecules/SampleButton.jsx'
 
 const ICON_MAP = {
   Drum,
   Disc,
   Music,
-  Zap,
-};
+  Zap
+}
 
 /**
  * Sidebar organism component
@@ -23,28 +23,28 @@ const ICON_MAP = {
  * @returns {JSX.Element} Sidebar element
  */
 export function Sidebar({ activeTool, setActiveTool }) {
-  const handleSampleClick = (sampleId) => {
-    setActiveTool(activeTool === sampleId ? null : sampleId);
-  };
+  const handleSampleClick = sampleId => {
+    setActiveTool(activeTool === sampleId ? null : sampleId)
+  }
 
   return (
-    <aside className="w-64 flex-none panel-glass border-r flex flex-col z-30">
-      <div className="sidebar-header">
-        <h2 className="sidebar-title">Library</h2>
-        <p className="sidebar-subtitle">Select a sample → click timeline</p>
+    <aside className='w-64 flex-none panel-glass border-r flex flex-col z-30'>
+      <div className='sidebar-header'>
+        <h2 className='sidebar-title'>Library</h2>
+        <p className='sidebar-subtitle'>Select a sample → click timeline</p>
       </div>
 
-      <div className="sidebar-content">
+      <div className='sidebar-content'>
         {Object.entries(SAMPLE_CATEGORIES).map(([category, { icon, items }]) => {
-          const IconComponent = ICON_MAP[icon];
+          const IconComponent = ICON_MAP[icon]
           return (
             <div key={category}>
-              <h3 className="category-title">
+              <h3 className='category-title'>
                 {IconComponent && <IconComponent size={16} />}
                 {category}
               </h3>
-              <div className="category-grid" role="list">
-                {items.map((sample) => (
+              <div className='category-grid' role='list'>
+                {items.map(sample => (
                   <SampleButton
                     key={sample.id}
                     sampleId={sample.id}
@@ -55,14 +55,14 @@ export function Sidebar({ activeTool, setActiveTool }) {
                 ))}
               </div>
             </div>
-          );
+          )
         })}
       </div>
     </aside>
-  );
+  )
 }
 
 Sidebar.propTypes = {
   activeTool: PropTypes.string,
-  setActiveTool: PropTypes.func.isRequired,
-};
+  setActiveTool: PropTypes.func.isRequired
+}

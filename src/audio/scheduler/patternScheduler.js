@@ -3,10 +3,10 @@
  * @module audio/scheduler/patternScheduler
  */
 
-import { controls } from '@strudel/core';
-import { mini } from '@strudel/mini';
+import { controls } from '@strudel/core'
+import { mini } from '@strudel/mini'
 
-const { s } = controls;
+const { s } = controls
 
 /**
  * Update the scheduler pattern based on the current grid state
@@ -18,32 +18,32 @@ const { s } = controls;
  */
 export function updateSchedulerPattern(grid, scheduler, barCount, cps) {
   if (!scheduler) {
-    return;
+    return
   }
 
   try {
-    const patternObjects = grid.map((row) => {
+    const patternObjects = grid.map(row => {
       if (!row || row.length === 0) {
-        return null;
+        return null
       }
       // Convert grid row to Strudel pattern string
       // "-" becomes "~" (rest) in Strudel syntax
-      const rowStr = `[${row.map((n) => (n === '-' ? '~' : n)).join(' ')}]`;
-      return s(mini(rowStr)).slow(barCount).legato(1).cps(cps);
-    });
+      const rowStr = `[${row.map(n => (n === '-' ? '~' : n)).join(' ')}]`
+      return s(mini(rowStr)).slow(barCount).legato(1).cps(cps)
+    })
 
-    const validPatterns = patternObjects.filter((p) => p !== null);
+    const validPatterns = patternObjects.filter(p => p !== null)
 
     // Stack all patterns together
     const mainPattern =
       validPatterns.length > 0
         ? validPatterns.reduce((acc, pat) => acc.stack(pat))
-        : s(mini('~')).cps(cps);
+        : s(mini('~')).cps(cps)
 
-    scheduler.setPattern(mainPattern);
+    scheduler.setPattern(mainPattern)
   } catch (e) {
-    console.error('Pattern Generation Error', e);
-    throw e;
+    console.error('Pattern Generation Error', e)
+    throw e
   }
 }
 
@@ -54,9 +54,9 @@ export function updateSchedulerPattern(grid, scheduler, barCount, cps) {
  */
 export function updateSchedulerCPS(scheduler, cps) {
   if (!scheduler || typeof scheduler.setCPS !== 'function') {
-    return;
+    return
   }
-  scheduler.setCPS(cps);
+  scheduler.setCPS(cps)
 }
 
 /**
@@ -65,9 +65,9 @@ export function updateSchedulerCPS(scheduler, cps) {
  */
 export function startScheduler(scheduler) {
   if (!scheduler) {
-    return;
+    return
   }
-  scheduler.start();
+  scheduler.start()
 }
 
 /**
@@ -76,7 +76,7 @@ export function startScheduler(scheduler) {
  */
 export function stopScheduler(scheduler) {
   if (!scheduler) {
-    return;
+    return
   }
-  scheduler.stop();
+  scheduler.stop()
 }

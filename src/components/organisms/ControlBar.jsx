@@ -3,12 +3,12 @@
  * @module components/organisms/ControlBar
  */
 
-import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
-import { Trash } from 'lucide-react';
-import { ControlGroup } from '../molecules/ControlGroup.jsx';
-import { PlaybackButton } from '../molecules/PlaybackButton.jsx';
-import { CONSTANTS } from '../../types/constants.js';
+import PropTypes from 'prop-types'
+import { motion } from 'framer-motion'
+import { Trash } from 'lucide-react'
+import { ControlGroup } from '../molecules/ControlGroup.jsx'
+import { PlaybackButton } from '../molecules/PlaybackButton.jsx'
+import { CONSTANTS } from '../../types/constants.js'
 
 /**
  * Control bar organism component
@@ -33,53 +33,53 @@ export function ControlBar({
   adjustBeatsPerBar,
   setBpm,
   togglePlayback,
-  resetSequencer,
+  resetSequencer
 }) {
   const handleBpmIncrement = () => {
-    setBpm((prev) => Math.min(CONSTANTS.MAX_BPM, prev + CONSTANTS.BPM_STEP));
-  };
+    setBpm(prev => Math.min(CONSTANTS.MAX_BPM, prev + CONSTANTS.BPM_STEP))
+  }
 
   const handleBpmDecrement = () => {
-    setBpm((prev) => Math.max(CONSTANTS.MIN_BPM, prev - CONSTANTS.BPM_STEP));
-  };
+    setBpm(prev => Math.max(CONSTANTS.MIN_BPM, prev - CONSTANTS.BPM_STEP))
+  }
 
   return (
-    <header className="control-bar">
-      <div className="control-bar-content">
+    <header className='control-bar'>
+      <div className='control-bar-content'>
         <ControlGroup
-          label="BARS"
+          label='BARS'
           value={bars}
           onIncrement={() => adjustBarCount(1)}
           onDecrement={() => adjustBarCount(-1)}
           isPlaying={isPlaying}
-          valueClassName="w-5"
+          valueClassName='w-5'
         />
 
         <ControlGroup
-          label="BEATS/BAR"
+          label='BEATS/BAR'
           value={beatsPerBar}
           onIncrement={() => adjustBeatsPerBar(1)}
           onDecrement={() => adjustBeatsPerBar(-1)}
           isPlaying={isPlaying}
-          valueClassName="w-5"
+          valueClassName='w-5'
         />
 
         <ControlGroup
-          label="BPM"
+          label='BPM'
           value={bpm}
           onIncrement={handleBpmIncrement}
           onDecrement={handleBpmDecrement}
           isPlaying={isPlaying}
-          valueClassName="w-8"
+          valueClassName='w-8'
         />
       </div>
 
-      <div className="control-bar-actions">
+      <div className='control-bar-actions'>
         <motion.button
           onClick={resetSequencer}
-          className="btn-reset"
-          title="Reset"
-          type="button"
+          className='btn-reset'
+          title='Reset'
+          type='button'
           whileTap={{ scale: 0.97 }}
         >
           <Trash size={18} />
@@ -88,7 +88,7 @@ export function ControlBar({
         <PlaybackButton isPlaying={isPlaying} onClick={togglePlayback} />
       </div>
     </header>
-  );
+  )
 }
 
 ControlBar.propTypes = {
@@ -100,5 +100,5 @@ ControlBar.propTypes = {
   adjustBeatsPerBar: PropTypes.func.isRequired,
   setBpm: PropTypes.func.isRequired,
   togglePlayback: PropTypes.func.isRequired,
-  resetSequencer: PropTypes.func.isRequired,
-};
+  resetSequencer: PropTypes.func.isRequired
+}

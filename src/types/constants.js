@@ -35,8 +35,8 @@ export const CONSTANTS = {
   /** Maximum number of tracks */
   MAX_TRACKS: 8,
   /** Minimum number of tracks */
-  MIN_TRACKS: 1,
-};
+  MIN_TRACKS: 1
+}
 
 /**
  * Sample library categories with icons and items
@@ -54,8 +54,8 @@ export const SAMPLE_CATEGORIES = {
       { id: 'gretsch', name: 'Acoustic' },
       { id: 'linnhats', name: 'Linn Hats' },
       { id: 'tok', name: 'Tok Kick' },
-      { id: 'odx', name: 'New Order' },
-    ],
+      { id: 'odx', name: 'New Order' }
+    ]
   },
   '808 Kit': {
     icon: 'Disc',
@@ -67,8 +67,8 @@ export const SAMPLE_CATEGORIES = {
       { id: '808hc', name: 'HiCon' },
       { id: '808lc', name: 'LoCon' },
       { id: '808ht', name: 'HiTom' },
-      { id: '808mc', name: 'MidCon' },
-    ],
+      { id: '808mc', name: 'MidCon' }
+    ]
   },
   Instruments: {
     icon: 'Music',
@@ -82,8 +82,8 @@ export const SAMPLE_CATEGORIES = {
       { id: 'juno', name: 'Juno Pad' },
       { id: 'sax', name: 'Sax' },
       { id: 'sitar', name: 'Sitar' },
-      { id: 'casio', name: 'Casio' },
-    ],
+      { id: 'casio', name: 'Casio' }
+    ]
   },
   'FX & Percussion': {
     icon: 'Zap',
@@ -98,10 +98,10 @@ export const SAMPLE_CATEGORIES = {
       { id: 'toys', name: 'Toys' },
       { id: 'industrial', name: 'Industrial' },
       { id: 'print', name: 'Printer' },
-      { id: 'amencutup', name: 'Amen Chop' },
-    ],
-  },
-};
+      { id: 'amencutup', name: 'Amen Chop' }
+    ]
+  }
+}
 
 /**
  * Color mapping for sample types
@@ -152,5 +152,5 @@ export const COLOR_MAP = {
   toys: 'bg-amber-500 border-amber-400 text-white',
   industrial: 'bg-gray-700 border-gray-600 text-white',
   print: 'bg-stone-400 border-stone-300 text-stone-900',
-  amencutup: 'bg-orange-700 border-orange-600 text-white',
-};
+  amencutup: 'bg-orange-700 border-orange-600 text-white'
+}

@@ -3,7 +3,7 @@
  * @module hooks/useKeyboardShortcuts
  */
 
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
 /**
  * Custom hook for handling keyboard shortcuts
@@ -14,22 +14,26 @@ import { useEffect } from 'react';
 export function useKeyboardShortcuts(isEnabled, onPlayPause, onClearTool) {
   useEffect(() => {
     if (!isEnabled) {
-      return;
+      return
     }
 
-    const handleGlobalKeydown = (e) => {
+    const handleGlobalKeydown = e => {
+      const targetTag = e.target.tagName
+      if (['BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'].includes(targetTag)) {
+        return
+      }
       if (e.code === 'Space') {
-        e.preventDefault();
-        onPlayPause();
+        e.preventDefault()
+        onPlayPause()
       }
       if (e.key === 'Escape') {
-        onClearTool();
+        onClearTool()
       }
-    };
+    }
 
-    window.addEventListener('keydown', handleGlobalKeydown);
+    window.addEventListener('keydown', handleGlobalKeydown)
     return () => {
-      window.removeEventListener('keydown', handleGlobalKeydown);
-    };
-  }, [isEnabled, onPlayPause, onClearTool]);
+      window.removeEventListener('keydown', handleGlobalKeydown)
+    }
+  }, [isEnabled, onPlayPause, onClearTool])
 }

@@ -3,8 +3,8 @@
  * @module components/molecules/SampleButton
  */
 
-import PropTypes from 'prop-types';
-import { getSampleStyle } from '../../utils/sampleUtils.js';
+import PropTypes from 'prop-types'
+import { getSampleStyle } from '../../utils/sampleUtils.js'
 
 /**
  * Sample button molecule component
@@ -16,7 +16,7 @@ import { getSampleStyle } from '../../utils/sampleUtils.js';
  * @returns {JSX.Element} Sample button element
  */
 export function SampleButton({ sampleId, sampleName, isActive, onClick }) {
-  const styleClasses = getSampleStyle(sampleId);
+  const styleClasses = getSampleStyle(sampleId)
 
   return (
     <button
@@ -26,22 +26,22 @@ export function SampleButton({ sampleId, sampleName, isActive, onClick }) {
       }`}
       title={`ID: ${sampleId}`}
       tabIndex={0}
-      onKeyDown={(e) => {
+      onKeyDown={e => {
         if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          e.stopPropagation();
-          onClick();
+          e.preventDefault()
+          e.stopPropagation()
+          onClick()
         }
       }}
     >
       {sampleName}
     </button>
-  );
+  )
 }
 
 SampleButton.propTypes = {
   sampleId: PropTypes.string.isRequired,
   sampleName: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
-};
+  onClick: PropTypes.func.isRequired
+}

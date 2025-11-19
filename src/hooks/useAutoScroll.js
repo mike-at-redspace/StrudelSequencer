@@ -3,8 +3,8 @@
  * @module hooks/useAutoScroll
  */
 
-import { useEffect, useRef } from 'react';
-import { CONSTANTS } from '../types/constants.js';
+import { useEffect, useRef } from 'react'
+import { CONSTANTS } from '../types/constants.js'
 
 /**
  * Custom hook for auto-scrolling to keep the playhead visible
@@ -13,41 +13,41 @@ import { CONSTANTS } from '../types/constants.js';
  */
 // eslint-disable-next-line no-unused-vars
 export function useAutoScroll(currentStep, _firstRowIndex = 0) {
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef(null)
 
   useEffect(() => {
     if (currentStep === null || !scrollContainerRef.current) {
-      return;
+      return
     }
 
-    const container = scrollContainerRef.current;
-    const activeElement = document.getElementById(`step-marker-${currentStep}`);
+    const container = scrollContainerRef.current
+    const activeElement = document.getElementById(`step-marker-${currentStep}`)
 
     if (activeElement) {
-      const containerRect = container.getBoundingClientRect();
-      const activeRect = activeElement.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect()
+      const activeRect = activeElement.getBoundingClientRect()
 
-      const isOutOfBoundsRight = activeRect.right > containerRect.right - CONSTANTS.SCROLL_PADDING;
-      const isOutOfBoundsLeft = activeRect.left < containerRect.left + CONSTANTS.SCROLL_PADDING;
+      const isOutOfBoundsRight = activeRect.right > containerRect.right - CONSTANTS.SCROLL_PADDING
+      const isOutOfBoundsLeft = activeRect.left < containerRect.left + CONSTANTS.SCROLL_PADDING
 
       if (isOutOfBoundsRight || isOutOfBoundsLeft) {
         activeElement.scrollIntoView({
           behavior: 'smooth',
           block: 'nearest',
-          inline: 'center',
-        });
+          inline: 'center'
+        })
       }
     }
-  }, [currentStep]);
+  }, [currentStep])
 
   /**
    * Scroll to the beginning of the sequence
    */
   const scrollToStart = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+      scrollContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' })
     }
-  };
+  }
 
-  return { scrollContainerRef, scrollToStart };
+  return { scrollContainerRef, scrollToStart }
 }

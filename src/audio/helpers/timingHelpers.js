@@ -10,7 +10,7 @@
  * @returns {number} Cycles per second
  */
 export function calculateCPS(bpm, beatsPerBar) {
-  return bpm / (60 * beatsPerBar);
+  return bpm / (60 * beatsPerBar)
 }
 
 /**
@@ -20,7 +20,7 @@ export function calculateCPS(bpm, beatsPerBar) {
  * @returns {number} Steps per second
  */
 export function calculateStepsPerSecond(cps, stepsPerBar) {
-  return cps * stepsPerBar;
+  return cps * stepsPerBar
 }
 
 /**
@@ -31,5 +31,5 @@ export function calculateStepsPerSecond(cps, stepsPerBar) {
  * @returns {number} Current step index (0-based)
  */
 export function calculateCurrentStep(elapsedTime, stepsPerSecond, totalSteps) {
-  return Math.floor(elapsedTime * stepsPerSecond) % totalSteps;
+  return Math.floor(elapsedTime * stepsPerSecond) % totalSteps
 }

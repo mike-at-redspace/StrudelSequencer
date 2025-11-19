@@ -3,12 +3,12 @@
  * @module components/pages/SequencerPage
  */
 
-import { useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Sidebar } from '../organisms/Sidebar.jsx';
-import { ControlBar } from '../organisms/ControlBar.jsx';
-import { SequencerGrid } from '../organisms/SequencerGrid.jsx';
-import { ActiveSampleDisplay } from '../molecules/ActiveSampleDisplay.jsx';
+import { useCallback } from 'react'
+import PropTypes from 'prop-types'
+import { Sidebar } from '../organisms/Sidebar.jsx'
+import { ControlBar } from '../organisms/ControlBar.jsx'
+import { SequencerGrid } from '../organisms/SequencerGrid.jsx'
+import { ActiveSampleDisplay } from '../molecules/ActiveSampleDisplay.jsx'
 
 /**
  * Sequencer page component
@@ -32,32 +32,32 @@ export function SequencerPage({ sequencerState, playbackState, activeToolState, 
     toggleCellSample,
     addNewTrack,
     removeTrack,
-    resetSequencer,
-  } = sequencerState;
+    resetSequencer
+  } = sequencerState
 
-  const { isPlaying, currentStep, togglePlayback, stopPlayback } = playbackState;
-  const { activeTool, setTool } = activeToolState;
-  const { scrollContainerRef, scrollToStart } = scrollState;
+  const { isPlaying, currentStep, togglePlayback, stopPlayback } = playbackState
+  const { activeTool, setTool } = activeToolState
+  const { scrollContainerRef, scrollToStart } = scrollState
 
   const handleReset = useCallback(() => {
-    resetSequencer();
-    stopPlayback();
-    scrollToStart();
-  }, [resetSequencer, stopPlayback, scrollToStart]);
+    resetSequencer()
+    stopPlayback()
+    scrollToStart()
+  }, [resetSequencer, stopPlayback, scrollToStart])
 
   // Memoize cell click handler to prevent unnecessary re-renders in SequencerGrid
   const handleCellClick = useCallback(
     (rowIndex, colIndex) => {
-      toggleCellSample(rowIndex, colIndex, activeTool);
+      toggleCellSample(rowIndex, colIndex, activeTool)
     },
     [toggleCellSample, activeTool]
-  );
+  )
 
   return (
-    <div className="sequencer-page">
+    <div className='sequencer-page'>
       <Sidebar activeTool={activeTool} setActiveTool={setTool} />
 
-      <main className="sequencer-main">
+      <main className='sequencer-main'>
         <ControlBar
           bars={bars}
           beatsPerBar={beatsPerBar}
@@ -70,8 +70,8 @@ export function SequencerPage({ sequencerState, playbackState, activeToolState, 
           resetSequencer={handleReset}
         />
 
-        <div className="sequencer-content-wrapper">
-          <div className="sequencer-panel">
+        <div className='sequencer-content-wrapper'>
+          <div className='sequencer-panel'>
             <SequencerGrid
               grid={grid}
               bars={bars}
@@ -90,7 +90,7 @@ export function SequencerPage({ sequencerState, playbackState, activeToolState, 
         </div>
       </main>
     </div>
-  );
+  )
 }
 
 SequencerPage.propTypes = {
@@ -106,23 +106,23 @@ SequencerPage.propTypes = {
     toggleCellSample: PropTypes.func.isRequired,
     addNewTrack: PropTypes.func.isRequired,
     removeTrack: PropTypes.func.isRequired,
-    resetSequencer: PropTypes.func.isRequired,
+    resetSequencer: PropTypes.func.isRequired
   }).isRequired,
   playbackState: PropTypes.shape({
     isPlaying: PropTypes.bool.isRequired,
     currentStep: PropTypes.number,
     togglePlayback: PropTypes.func.isRequired,
-    stopPlayback: PropTypes.func.isRequired,
+    stopPlayback: PropTypes.func.isRequired
   }).isRequired,
   activeToolState: PropTypes.shape({
     activeTool: PropTypes.string,
     setTool: PropTypes.func.isRequired,
-    clearTool: PropTypes.func.isRequired,
+    clearTool: PropTypes.func.isRequired
   }).isRequired,
   scrollState: PropTypes.shape({
     scrollContainerRef: PropTypes.shape({
-      current: PropTypes.instanceOf(Element),
+      current: PropTypes.instanceOf(Element)
     }).isRequired,
-    scrollToStart: PropTypes.func.isRequired,
-  }).isRequired,
-};
+    scrollToStart: PropTypes.func.isRequired
+  }).isRequired
+}

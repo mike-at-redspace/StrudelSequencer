@@ -3,7 +3,7 @@
  * @module utils/sampleUtils
  */
 
-import { COLOR_MAP, SAMPLE_CATEGORIES } from '../types/constants.js';
+import { COLOR_MAP, SAMPLE_CATEGORIES } from '../types/constants.js'
 
 /**
  * Get the Tailwind CSS classes for a sample based on its name
@@ -12,9 +12,9 @@ import { COLOR_MAP, SAMPLE_CATEGORIES } from '../types/constants.js';
  */
 export function getSampleStyle(name) {
   if (name === '-') {
-    return 'bg-white/5 border-white/5 hover:bg-white/10';
+    return 'bg-white/5 border-white/5 hover:bg-white/10'
   }
-  return COLOR_MAP[name] || 'bg-slate-600 border-slate-500 text-white';
+  return COLOR_MAP[name] || 'bg-slate-600 border-slate-500 text-white'
 }
 
 /**
@@ -24,10 +24,10 @@ export function getSampleStyle(name) {
  */
 export function getSampleName(id) {
   for (const category in SAMPLE_CATEGORIES) {
-    const item = SAMPLE_CATEGORIES[category].items.find((i) => i.id === id);
+    const item = SAMPLE_CATEGORIES[category].items.find(i => i.id === id)
     if (item) {
-      return item.name;
+      return item.name
     }
   }
-  return id;
+  return id
 }

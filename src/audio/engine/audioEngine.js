@@ -3,8 +3,8 @@
  * @module audio/engine/audioEngine
  */
 
-import { repl } from '@strudel/core';
-import { getAudioContext, webaudioOutput } from '@strudel/webaudio';
+import { repl } from '@strudel/core'
+import { getAudioContext, webaudioOutput } from '@strudel/webaudio'
 
 /**
  * Initialize the audio engine and create a scheduler
@@ -13,20 +13,20 @@ import { getAudioContext, webaudioOutput } from '@strudel/webaudio';
  */
 export async function initializeAudioEngine() {
   try {
-    const ctx = getAudioContext();
+    const ctx = getAudioContext()
     if (ctx.state === 'suspended') {
-      await ctx.resume();
+      await ctx.resume()
     }
 
     const { scheduler } = repl({
       defaultOutput: webaudioOutput,
-      getTime: () => ctx.currentTime,
-    });
+      getTime: () => ctx.currentTime
+    })
 
-    return { scheduler, audioContext: ctx };
+    return { scheduler, audioContext: ctx }
   } catch (err) {
-    console.error('Failed to initialize audio:', err);
-    throw new Error('Audio initialization failed. Please verify your browser supports Web Audio.');
+    console.error('Failed to initialize audio:', err)
+    throw new Error('Audio initialization failed. Please verify your browser supports Web Audio.')
   }
 }
 
@@ -37,6 +37,6 @@ export async function initializeAudioEngine() {
  */
 export async function resumeAudioContext(audioContext) {
   if (audioContext && audioContext.state === 'suspended') {
-    await audioContext.resume();
+    await audioContext.resume()
   }
 }

@@ -3,9 +3,9 @@
  * @module components/atoms/StepCell
  */
 
-import { memo, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js';
+import { memo, useMemo } from 'react'
+import PropTypes from 'prop-types'
+import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js'
 
 /**
  * Step cell atom component
@@ -18,53 +18,53 @@ import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js';
  * @returns {JSX.Element} Step cell element
  */
 function StepCellComponent({ value, isActive, activeTool, onClick, id }) {
-  const isCellFilled = value !== '-';
+  const isCellFilled = value !== '-'
 
-  const cellStyle = useMemo(() => getSampleStyle(value), [value]);
+  const cellStyle = useMemo(() => getSampleStyle(value), [value])
   const sampleName = useMemo(
     () => (isCellFilled ? getSampleName(value) : ''),
     [isCellFilled, value]
-  );
+  )
 
   const cellClassName = useMemo(() => {
-    const classes = ['step-cell', cellStyle];
+    const classes = ['step-cell', cellStyle]
 
-    classes.push(isCellFilled ? 'step-cell-filled' : 'step-cell-empty');
+    classes.push(isCellFilled ? 'step-cell-filled' : 'step-cell-empty')
 
     if (activeTool) {
-      classes.push('cursor-cell');
+      classes.push('cursor-cell')
     } else if (isCellFilled) {
-      classes.push('cursor-grab');
+      classes.push('cursor-grab')
     }
 
-    classes.push(isActive ? 'step-cell-active' : 'step-cell-hover');
+    classes.push(isActive ? 'step-cell-active' : 'step-cell-hover')
 
-    return classes.join(' ');
-  }, [cellStyle, activeTool, isCellFilled, isActive]);
+    return classes.join(' ')
+  }, [cellStyle, activeTool, isCellFilled, isActive])
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      e.stopPropagation();
-      onClick();
+      e.preventDefault()
+      e.stopPropagation()
+      onClick()
     }
-  };
+  }
 
   return (
     <div
       id={id}
-      className="step-cell-container group"
+      className='step-cell-container group'
       onClick={onClick}
       onKeyDown={handleKeyDown}
       title={sampleName}
-      role="button"
+      role='button'
       tabIndex={0}
     >
       <div className={cellClassName}>
-        {!isCellFilled && <div className="step-cell-empty-dot" />}
+        {!isCellFilled && <div className='step-cell-empty-dot' />}
       </div>
     </div>
-  );
+  )
 }
 
 StepCellComponent.propTypes = {
@@ -72,8 +72,8 @@ StepCellComponent.propTypes = {
   isActive: PropTypes.bool,
   activeTool: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  id: PropTypes.string,
-};
+  id: PropTypes.string
+}
 
 /**
  * Memoized StepCell component to prevent unnecessary re-renders.
@@ -87,5 +87,5 @@ export const StepCell = memo(StepCellComponent, (prevProps, nextProps) => {
     prevProps.activeTool === nextProps.activeTool &&
     prevProps.id === nextProps.id &&
     prevProps.onClick === nextProps.onClick
-  );
-});
+  )
+})

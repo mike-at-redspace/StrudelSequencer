@@ -3,7 +3,7 @@
  * @module components/atoms/Button
  */
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 /**
  * Button atom component
@@ -17,10 +17,10 @@ import PropTypes from 'prop-types';
  */
 export function Button({ children, onClick, disabled = false, className = '', title }) {
   return (
-    <button onClick={onClick} disabled={disabled} className={className} title={title} type="button">
+    <button onClick={onClick} disabled={disabled} className={className} title={title} type='button'>
       {children}
     </button>
-  );
+  )
 }
 
 Button.propTypes = {
@@ -28,5 +28,5 @@ Button.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   className: PropTypes.string,
-  title: PropTypes.string,
-};
+  title: PropTypes.string
+}

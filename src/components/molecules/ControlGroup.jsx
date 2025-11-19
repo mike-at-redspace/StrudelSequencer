@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import { Plus, Minus } from 'lucide-react';
-import { ControlButton } from '../atoms/ControlButton.jsx';
-import NumberFlow from '@number-flow/react';
+import PropTypes from 'prop-types'
+import { Plus, Minus } from 'lucide-react'
+import { ControlButton } from '../atoms/ControlButton.jsx'
+import NumberFlow from '@number-flow/react'
 
 /**
  * Control group molecule component
@@ -16,13 +16,25 @@ export function ControlGroup({
   valueClassName = 'w-12',
   min = 0,
   max = 999,
-  step = 1,
+  step = 1
 }) {
+  const createKeyDownHandler = handler => e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      e.stopPropagation()
+      handler()
+    }
+  }
+
   return (
-    <div className="control-group">
-      <span className="control-label">{label}</span>
-      <div className="flex items-center gap-2">
-        <ControlButton isPlaying={isPlaying} onClick={onDecrement}>
+    <div className='control-group'>
+      <span className='control-label'>{label}</span>
+      <div className='flex items-center gap-2'>
+        <ControlButton
+          isPlaying={isPlaying}
+          onClick={onDecrement}
+          onKeyDown={createKeyDownHandler(onDecrement)}
+        >
           <Minus size={14} />
         </ControlButton>
 
@@ -36,12 +48,16 @@ export function ControlGroup({
           className={`control-value ${valueClassName}`}
         />
 
-        <ControlButton isPlaying={isPlaying} onClick={onIncrement}>
+        <ControlButton
+          isPlaying={isPlaying}
+          onClick={onIncrement}
+          onKeyDown={createKeyDownHandler(onIncrement)}
+        >
           <Plus size={14} />
         </ControlButton>
       </div>
     </div>
-  );
+  )
 }
 
 ControlGroup.propTypes = {
@@ -54,5 +70,5 @@ ControlGroup.propTypes = {
   valueClassName: PropTypes.string,
   min: PropTypes.number,
   max: PropTypes.number,
-  step: PropTypes.number,
-};
+  step: PropTypes.number
+}
