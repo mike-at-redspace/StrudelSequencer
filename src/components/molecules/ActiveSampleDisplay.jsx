@@ -4,6 +4,7 @@
  */
 
 import PropTypes from 'prop-types';
+import { motion, AnimatePresence } from 'framer-motion';
 import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js';
 
 /**
@@ -22,16 +23,25 @@ export function ActiveSampleDisplay({ activeTool }) {
 
   return (
     <div className="active-sample-hud">
-      <div className="active-sample-content">
-        <div className={`active-sample-indicator ${bgColorClass}`} />
-        <span className="active-sample-text">
-          Adding Sample: <b>&quot;{getSampleName(activeTool)}&quot;</b>
-        </span>
-        <div className="active-sample-divider" />
-        <span className="active-sample-hint">
-          <span className="key-badge">ESC</span> to stop
-        </span>
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTool}
+          className="active-sample-content"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+        >
+          <div className={`active-sample-indicator ${bgColorClass}`} />
+          <span className="active-sample-text">
+            Adding Sample: <b>&quot;{getSampleName(activeTool)}&quot;</b>
+          </span>
+          <div className="active-sample-divider" />
+          <span className="active-sample-hint">
+            <span className="key-badge">ESC</span> to stop
+          </span>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

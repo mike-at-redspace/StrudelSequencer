@@ -4,6 +4,7 @@
  */
 
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import { Trash } from 'lucide-react';
 import { ControlGroup } from '../molecules/ControlGroup.jsx';
 import { PlaybackButton } from '../molecules/PlaybackButton.jsx';
@@ -74,9 +75,15 @@ export function ControlBar({
       </div>
 
       <div className="control-bar-actions">
-        <button onClick={resetSequencer} className="btn-reset" title="Reset" type="button">
+        <motion.button
+          onClick={resetSequencer}
+          className="btn-reset"
+          title="Reset"
+          type="button"
+          whileTap={{ scale: 0.97 }}
+        >
           <Trash size={18} />
-        </button>
+        </motion.button>
 
         <PlaybackButton isPlaying={isPlaying} onClick={togglePlayback} />
       </div>

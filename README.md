@@ -16,10 +16,12 @@ A step sequencer built with React and [Strudel](https://strudel.cc/) (TidalCycle
 
 ## Tech Stack
 
-- React 18 + Vite
+- React 19 + Vite
 - TailwindCSS 4
+- Framer Motion (animations)
 - Strudel (@strudel/core, @strudel/mini, @strudel/webaudio)
 - Lucide React (icons)
+- @number-flow/react (animated number input)
 
 ## Getting Started
 
@@ -71,6 +73,17 @@ src/
 ## Browser Support
 
 Requires Web Audio API (Chrome, Firefox, Safari latest versions)
+
+## Credits
+
+This project is built with these amazing open-source libraries:
+
+- **[Strudel](https://strudel.cc/)** - TidalCycles for the web, bringing live-coding power to the browser
+- **[React](https://react.dev/)** - A JavaScript library for building user interfaces
+- **[Framer Motion](https://www.framer.com/motion/)** - Production-ready animation library
+- **[@number-flow/react](https://www.npmjs.com/package/@number-flow/react)** - Animated number input component
+- **[Lucide React](https://lucide.dev/)** - Beautiful, consistent SVG icon library
+- **[TailwindCSS](https://tailwindcss.com/)** - Utility-first CSS framework
 
 ## License
 

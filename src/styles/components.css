@@ -234,7 +234,7 @@
   }
 
   .grid-container {
-    @apply flex-1 overflow-auto scroll-smooth relative;
+    @apply flex-1 overflow-auto scroll-smooth;
   }
 
   .grid-content {
@@ -242,7 +242,7 @@
   }
 
   .grid-header {
-    @apply flex h-10 sticky top-0 z-10 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 pl-2 shadow-md;
+    @apply flex h-10 sticky top-0 z-20 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 pl-2 shadow-md;
   }
 
   .bar-container {

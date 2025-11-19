@@ -5,6 +5,7 @@
 
 import { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion';
 import { Plus, Trash2 } from 'lucide-react';
 import { StepCell } from '../atoms/StepCell.jsx';
 import { CONSTANTS } from '../../types/constants.js';
@@ -62,6 +63,34 @@ export function SequencerGrid({
     return handlers;
   }, [grid, createCellClickHandler]);
 
+  // Animation variants for track rows
+  const trackRowVariants = {
+    initial: { opacity: 0, scale: 0.95 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.95 },
+  };
+
+  // Animation variants for bar containers
+  const barVariants = {
+    initial: { opacity: 0, scale: 0.98 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.98 },
+  };
+
+  // Animation variants for beat containers
+  const beatVariants = {
+    initial: { opacity: 0, scale: 0.98 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.98 },
+  };
+
+  // Animation variants for grid rows
+  const gridRowVariants = {
+    initial: { opacity: 0, scale: 0.95 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.95 },
+  };
+
   return (
     <div className="flex flex-1 overflow-hidden">
       {/* Track controls column */}
@@ -70,7 +99,15 @@ export function SequencerGrid({
         <div className="track-controls-content">
           <div className="flex flex-col">
             {grid.map((_, rowIndex) => (
-              <div key={rowIndex} className="track-row group">
+              <motion.div
+                key={rowIndex}
+                className="track-row group"
+                variants={trackRowVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+              >
                 <button
                   onClick={() => onRemoveTrack(rowIndex)}
                   className="btn-remove-track"
@@ -80,10 +117,10 @@ export function SequencerGrid({
                 >
                   <Trash2 size={16} />
                 </button>
-              </div>
+              </motion.div>
             ))}
 
-            <div
+            <motion.div
               className="btn-add-track-container"
               onClick={onAddTrack}
               role="button"
@@ -94,6 +131,7 @@ export function SequencerGrid({
                   onAddTrack();
                 }
               }}
+              whileTap={{ scale: 0.97 }}
             >
               <button
                 disabled={grid.length >= CONSTANTS.MAX_TRACKS}
@@ -102,7 +140,7 @@ export function SequencerGrid({
               >
                 <Plus size={20} />
               </button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -111,16 +149,40 @@ export function SequencerGrid({
       <div ref={scrollContainerRef} className="grid-container">
         <div className="grid-content">
           {/* Header row with bar/beat markers */}
-          <div className="grid-header">
+          <div className="grid-header" style={{ position: 'sticky', top: 0, zIndex: 20 }}>
             {Array(bars)
               .fill(0)
               .map((_, barIndex) => (
-                <div key={barIndex} className="bar-container">
+                <motion.div
+                  key={barIndex}
+                  className="bar-container"
+                  variants={barVariants}
+                  initial="initial"
+                  animate="animate"
+                  transition={{
+                    delay: barIndex * 0.05,
+                    type: 'spring',
+                    stiffness: 500,
+                    damping: 35,
+                  }}
+                >
                   <div className="bar-label">BAR {barIndex + 1}</div>
                   {Array(beatsPerBar)
                     .fill(0)
                     .map((_, beatIndex) => (
-                      <div key={beatIndex} className="beat-container">
+                      <motion.div
+                        key={beatIndex}
+                        className="beat-container"
+                        variants={beatVariants}
+                        initial="initial"
+                        animate="animate"
+                        transition={{
+                          delay: beatIndex * 0.03,
+                          type: 'spring',
+                          stiffness: 500,
+                          damping: 35,
+                        }}
+                      >
                         {Array(CONSTANTS.STEPS_PER_BEAT)
                           .fill(0)
                           .map((_, stepIndex) => (
@@ -132,15 +194,23 @@ export function SequencerGrid({
                               />
                             </div>
                           ))}
-                      </div>
+                      </motion.div>
                     ))}
-                </div>
+                </motion.div>
               ))}
           </div>
 
           {/* Grid rows */}
           {grid.map((row, rowIndex) => (
-            <div key={rowIndex} className="grid-row">
+            <motion.div
+              key={rowIndex}
+              className="grid-row"
+              layout
+              variants={gridRowVariants}
+              initial="initial"
+              animate="animate"
+              transition={{ delay: rowIndex * 0.03, type: 'spring', stiffness: 500, damping: 35 }}
+            >
               {Array(bars)
                 .fill(0)
                 .map((_, barIndex) => (
@@ -148,7 +218,19 @@ export function SequencerGrid({
                     {Array(beatsPerBar)
                       .fill(0)
                       .map((_, beatIndex) => (
-                        <div key={beatIndex} className="beat-container">
+                        <motion.div
+                          key={beatIndex}
+                          className="beat-container"
+                          variants={beatVariants}
+                          initial="initial"
+                          animate="animate"
+                          transition={{
+                            delay: beatIndex * 0.02,
+                            type: 'spring',
+                            stiffness: 500,
+                            damping: 35,
+                          }}
+                        >
                           {Array(CONSTANTS.STEPS_PER_BEAT)
                             .fill(0)
                             .map((_, stepIndex) => {
@@ -176,11 +258,11 @@ export function SequencerGrid({
                                 />
                               );
                             })}
-                        </div>
+                        </motion.div>
                       ))}
                   </div>
                 ))}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

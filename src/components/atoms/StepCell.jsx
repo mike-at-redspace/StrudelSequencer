@@ -20,15 +20,12 @@ import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js';
 function StepCellComponent({ value, isActive, activeTool, onClick, id }) {
   const isCellFilled = value !== '-';
 
-  // Memoize expensive utility function calls
   const cellStyle = useMemo(() => getSampleStyle(value), [value]);
   const sampleName = useMemo(
     () => (isCellFilled ? getSampleName(value) : ''),
     [isCellFilled, value]
   );
 
-  // Memoize className construction
-  // IMPORTANT: step-cell-active must come last to ensure it overrides other styles
   const cellClassName = useMemo(() => {
     const classes = ['step-cell', cellStyle];
 
@@ -40,7 +37,6 @@ function StepCellComponent({ value, isActive, activeTool, onClick, id }) {
       classes.push('cursor-grab');
     }
 
-    // Active state must be last to ensure proper CSS specificity
     classes.push(isActive ? 'step-cell-active' : 'step-cell-hover');
 
     return classes.join(' ');
