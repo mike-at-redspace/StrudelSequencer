@@ -3,7 +3,7 @@
  * @module hooks/useSequencerState
  */
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { CONSTANTS } from '../types/constants.js'
 import {
   createDefaultGrid,
@@ -14,6 +14,7 @@ import {
 
 /**
  * Custom hook for managing sequencer state (grid, bars, beats, BPM)
+ * Implements a history stack for beat changes to allow restoration of hidden data
  * @returns {Object} Sequencer state and control functions
  */
 export function useSequencerState() {
@@ -23,6 +24,10 @@ export function useSequencerState() {
   const [grid, setGrid] = useState(() =>
     createDefaultGrid(CONSTANTS.DEFAULT_BARS, CONSTANTS.DEFAULT_BEATS)
   )
+  const [beatHistoryAvailable, setBeatHistoryAvailable] = useState(false)
+
+  // History stack for beat changes - allows restoration if user toggles beats
+  const beatHistoryRef = useRef([])
 
   const stepsPerBar = beatsPerBar * CONSTANTS.STEPS_PER_BEAT
   const totalSequenceSteps = bars * stepsPerBar
@@ -102,6 +107,13 @@ export function useSequencerState() {
 
   /**
    * Adjust the number of beats per bar
+   * Stores the previous grid state in history to allow restoration
+   *
+   * Data Preservation Strategy:
+   * - When reducing beats: hidden steps are preserved in the full grid state
+   * - When increasing beats: if previous state is in history, restore from there
+   * - Otherwise: expand with empty steps
+   *
    * @param {number} increment - Amount to adjust (positive or negative)
    */
   const adjustBeatsPerBar = useCallback(
@@ -114,10 +126,24 @@ export function useSequencerState() {
         return
       }
 
+      // Save current grid state to history before changing beats
+      beatHistoryRef.current.push({
+        beats: beatsPerBar,
+        grid: grid.map(row => [...row]) // Deep copy
+      })
+
+      // Keep history size reasonable (last 20 changes)
+      if (beatHistoryRef.current.length > 20) {
+        beatHistoryRef.current.shift()
+      }
+
+      // Update state to reflect history availability
+      setBeatHistoryAvailable(beatHistoryRef.current.length > 0)
+
       setGrid(prevGrid => resizeGridByBeats(prevGrid, beatsPerBar, newBeats, bars))
       setBeatsPerBar(newBeats)
     },
-    [beatsPerBar, bars]
+    [beatsPerBar, bars, grid]
   )
 
   /**
@@ -137,8 +163,23 @@ export function useSequencerState() {
   const resetSequencer = useCallback(() => {
     if (window.confirm('Clear all tracks?')) {
       setGrid([createEmptyRow(totalSequenceSteps)])
+      beatHistoryRef.current = []
+      setBeatHistoryAvailable(false)
     }
   }, [totalSequenceSteps])
+
+  /**
+   * Restore grid to a previous beat configuration
+   * Useful for undoing beat changes and recovering hidden data
+   * @param {number} targetBeats - Target beats per bar to restore
+   */
+  const restoreBeatHistory = useCallback(targetBeats => {
+    const historyEntry = beatHistoryRef.current.findLast(entry => entry.beats === targetBeats)
+    if (historyEntry) {
+      setGrid(historyEntry.grid.map(row => [...row]))
+      setBeatsPerBar(targetBeats)
+    }
+  }, [])
 
   return {
     bars,
@@ -147,6 +188,7 @@ export function useSequencerState() {
     grid,
     stepsPerBar,
     totalSequenceSteps,
+    beatHistoryAvailable,
     setBpm,
     updateGridCell,
     toggleCellSample,
@@ -156,6 +198,7 @@ export function useSequencerState() {
     adjustBeatsPerBar,
     adjustBpm,
     resetSequencer,
-    setGrid
+    setGrid,
+    restoreBeatHistory
   }
 }

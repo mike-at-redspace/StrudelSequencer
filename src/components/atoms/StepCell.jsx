@@ -13,11 +13,10 @@ import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js'
  * @param {string} props.value - Cell value (sample ID or "-")
  * @param {boolean} props.isActive - Whether this step is currently playing
  * @param {string|null} props.activeTool - Currently selected tool/sample
- * @param {Function} props.onClick - Click handler
- * @param {string} props.id - Element ID (for first row step markers)
+ * @param {string} props.id - Element ID for event delegation (format: cell-{rowIndex}-{colIndex})
  * @returns {JSX.Element} Step cell element
  */
-function StepCellComponent({ value, isActive, activeTool, onClick, id }) {
+function StepCellComponent({ value, isActive, activeTool, id }) {
   const isCellFilled = value !== '-'
 
   const cellStyle = useMemo(() => getSampleStyle(value), [value])
@@ -42,20 +41,10 @@ function StepCellComponent({ value, isActive, activeTool, onClick, id }) {
     return classes.join(' ')
   }, [cellStyle, activeTool, isCellFilled, isActive])
 
-  const handleKeyDown = e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      e.stopPropagation()
-      onClick()
-    }
-  }
-
   return (
     <div
       id={id}
       className='step-cell-container group'
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
       title={sampleName}
       role='button'
       tabIndex={0}
@@ -71,8 +60,7 @@ StepCellComponent.propTypes = {
   value: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
   activeTool: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
-  id: PropTypes.string
+  id: PropTypes.string.isRequired
 }
 
 /**
@@ -85,7 +73,6 @@ export const StepCell = memo(StepCellComponent, (prevProps, nextProps) => {
     prevProps.value === nextProps.value &&
     prevProps.isActive === nextProps.isActive &&
     prevProps.activeTool === nextProps.activeTool &&
-    prevProps.id === nextProps.id &&
-    prevProps.onClick === nextProps.onClick
+    prevProps.id === nextProps.id
   )
 })

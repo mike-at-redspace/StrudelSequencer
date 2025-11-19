@@ -3,7 +3,7 @@
  * @module components/organisms/SequencerGrid
  */
 
-import { useMemo, useCallback } from 'react'
+import { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 import { Plus, Trash2 } from 'lucide-react'
@@ -37,31 +37,20 @@ export function SequencerGrid({
   onRemoveTrack,
   scrollContainerRef
 }) {
-  const handleCellClick = useCallback(
-    (rowIndex, stepIndex) => {
-      onCellClick(rowIndex, stepIndex)
+  // Event delegation: handle all cell clicks at the container level
+  const handleGridClick = useCallback(
+    e => {
+      const target = e.target.closest('.step-cell-container')
+      if (!target) return
+
+      const [, rowIndexStr, colIndexStr] = target.id.split('-')
+      const rowIndex = parseInt(rowIndexStr, 10)
+      const colIndex = parseInt(colIndexStr, 10)
+
+      onCellClick(rowIndex, colIndex)
     },
     [onCellClick]
   )
-
-  const createCellClickHandler = useCallback(
-    (rowIndex, stepIndex) => {
-      return () => handleCellClick(rowIndex, stepIndex)
-    },
-    [handleCellClick]
-  )
-
-  // Memoize handlers map - only recreate when grid structure changes
-  const clickHandlers = useMemo(() => {
-    const handlers = new Map()
-    grid.forEach((row, rowIndex) => {
-      row.forEach((_, stepIndex) => {
-        const key = `${rowIndex}-${stepIndex}`
-        handlers.set(key, createCellClickHandler(rowIndex, stepIndex))
-      })
-    })
-    return handlers
-  }, [grid, createCellClickHandler])
 
   // Animation variants for track rows
   const trackRowVariants = {
@@ -148,7 +137,18 @@ export function SequencerGrid({
 
       {/* Grid content */}
       <div ref={scrollContainerRef} className='grid-container'>
-        <div className='grid-content'>
+        <div
+          className='grid-content'
+          onClick={handleGridClick}
+          onKeyDown={e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              e.stopPropagation()
+              handleGridClick(e)
+            }
+          }}
+          role='presentation'
+        >
           {/* Header row with bar/beat markers */}
           <div className='grid-header' style={{ position: 'sticky', top: 0, zIndex: 20 }}>
             {Array(bars)
@@ -245,8 +245,7 @@ export function SequencerGrid({
 
                               const cell = row[globalStepIndex]
                               const isActive = currentStep === globalStepIndex
-                              const handlerKey = `${rowIndex}-${globalStepIndex}`
-                              const cellClickHandler = clickHandlers.get(handlerKey)
+                              const cellId = `cell-${rowIndex}-${globalStepIndex}`
 
                               return (
                                 <StepCell
@@ -254,8 +253,7 @@ export function SequencerGrid({
                                   value={cell}
                                   isActive={isActive}
                                   activeTool={activeTool}
-                                  onClick={cellClickHandler}
-                                  id={rowIndex === 0 ? `step-marker-${globalStepIndex}` : undefined}
+                                  id={cellId}
                                 />
                               )
                             })}

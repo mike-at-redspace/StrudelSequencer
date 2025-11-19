@@ -47,20 +47,23 @@ npm run format       # Format with Prettier
 
 ```
 src/
-  app/              # Main application
+  app/              # Main application component
   audio/            # Audio engine (Strudel integration)
-    engine/         # Audio initialization
-    scheduler/      # Pattern scheduling
-    helpers/        # Timing and sample loading
+    engine/         # Audio initialization and engine
+    scheduler/      # Pattern scheduling logic
+    helpers/        # Timing, sample loading, and library management
   components/       # React components (atomic design)
-    atoms/          # Basic UI elements
-    molecules/      # Composite components
-    organisms/      # Complex sections
-    pages/          # Page-level components
-  hooks/            # Custom React hooks
-  styles/           # TailwindCSS layers
-  utils/            # Utility functions
-  types/            # Constants and types
+    atoms/          # Basic UI elements (Button, StepCell, etc.)
+    molecules/      # Composite components (SampleButton, PlaybackButton, etc.)
+    organisms/      # Complex sections (ControlBar, SequencerGrid, Sidebar)
+    pages/          # Page-level components (IntroScreen, SequencerPage)
+  context/          # Legacy context providers
+  contexts/         # New context providers and hooks
+    hooks/          # Context-specific hooks
+  hooks/            # Custom React hooks (audio, playback, keyboard, etc.)
+  styles/           # TailwindCSS layers (base, components, utilities)
+  utils/            # Utility functions (grid, sample management)
+  types/            # Constants and type definitions
 ```
 
 ## Architecture
