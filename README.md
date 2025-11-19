@@ -57,8 +57,7 @@ src/
     molecules/      # Composite components (SampleButton, PlaybackButton, etc.)
     organisms/      # Complex sections (ControlBar, SequencerGrid, Sidebar)
     pages/          # Page-level components (IntroScreen, SequencerPage)
-  context/          # Legacy context providers
-  contexts/         # New context providers and hooks
+  context/         # New context providers and hooks
     hooks/          # Context-specific hooks
   hooks/            # Custom React hooks (audio, playback, keyboard, etc.)
   styles/           # TailwindCSS layers (base, components, utilities)

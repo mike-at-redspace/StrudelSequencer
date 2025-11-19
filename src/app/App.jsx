@@ -3,12 +3,9 @@
  * @module app/App
  */
 
-import { useAudioInitialization } from '../hooks/useAudioInitialization.js'
-import { SequencerProvider } from '../context/SequencerContext.jsx'
-import { ActiveToolProvider } from '../context/ActiveToolContext.jsx'
-import { PlaybackProvider } from '../context/PlaybackContext.jsx'
-import { IntroScreen } from '../components/pages/IntroScreen.jsx'
-import { SequencerPage } from '../components/pages/SequencerPage.jsx'
+import { useAudioInitialization } from '@/hooks'
+import { SequencerProvider, ActiveToolProvider, PlaybackProvider } from '@/context'
+import { IntroScreen, SequencerPage } from '@/components'
 
 /**
  * Main App component

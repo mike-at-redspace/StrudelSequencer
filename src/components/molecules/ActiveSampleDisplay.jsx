@@ -5,7 +5,7 @@
 
 import PropTypes from 'prop-types'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js'
+import { getSampleStyle, getSampleName } from '@/utils'
 
 /**
  * Active sample display molecule component

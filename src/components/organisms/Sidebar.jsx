@@ -5,8 +5,8 @@
 
 import PropTypes from 'prop-types'
 import { Drum, Disc, Music, Zap } from 'lucide-react'
-import { SAMPLE_CATEGORIES } from '../../types/constants.js'
-import { SampleButton } from '../molecules/SampleButton.jsx'
+import { SAMPLE_CATEGORIES } from '@/types'
+import { SampleButton } from '@/components'
 
 const ICON_MAP = {
   Drum,

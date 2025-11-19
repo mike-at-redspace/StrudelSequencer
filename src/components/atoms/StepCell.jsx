@@ -5,7 +5,7 @@
 
 import { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js'
+import { getSampleStyle, getSampleName } from '@/utils'
 
 /**
  * Step cell atom component

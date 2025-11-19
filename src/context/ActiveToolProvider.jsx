@@ -4,8 +4,8 @@
  */
 
 import PropTypes from 'prop-types'
-import { useActiveTool } from '../hooks/useActiveTool.js'
-import { ActiveToolContext } from '../contexts/ActiveToolContext.js'
+import { useActiveTool } from '@/hooks'
+import { ActiveToolContext } from './ActiveToolContext.js'
 
 /**
  * Provider component that wraps the app with active tool state context

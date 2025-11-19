@@ -5,7 +5,7 @@
  */
 
 import { useContext } from 'react'
-import { SequencerContext } from '../SequencerContext.js'
+import { SequencerContext } from '@/context'
 
 /**
  * Hook to access sequencer state from context

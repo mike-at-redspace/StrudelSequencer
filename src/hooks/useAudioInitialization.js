@@ -4,8 +4,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react'
-import { initializeAudioEngine } from '../audio/engine/audioEngine.js'
-import { loadSampleLibrary } from '../audio/helpers/sampleLoader.js'
+import { initializeAudioEngine, loadSampleLibrary } from '@/audio'
 
 /**
  * Custom hook for managing audio initialization

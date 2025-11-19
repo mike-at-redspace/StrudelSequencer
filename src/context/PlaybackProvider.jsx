@@ -4,7 +4,7 @@
  */
 
 import PropTypes from 'prop-types'
-import { usePlaybackInitialize, PlaybackContext } from '../contexts/hooks/usePlaybackContext.js'
+import { usePlaybackInitialize, PlaybackContext } from './hooks/usePlaybackContext.js'
 
 /**
  * Provider component that wraps the app with playback state context

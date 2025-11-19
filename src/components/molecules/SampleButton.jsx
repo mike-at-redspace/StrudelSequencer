@@ -4,7 +4,7 @@
  */
 
 import PropTypes from 'prop-types'
-import { getSampleStyle } from '../../utils/sampleUtils.js'
+import { getSampleStyle } from '@/utils'
 
 /**
  * Sample button molecule component

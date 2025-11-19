@@ -4,13 +4,8 @@
  */
 
 import { useState, useCallback, useRef } from 'react'
-import { CONSTANTS } from '../types/constants.js'
-import {
-  createDefaultGrid,
-  createEmptyRow,
-  resizeGridByBars,
-  resizeGridByBeats
-} from '../utils/gridUtils.js'
+import { CONSTANTS } from '@/types'
+import { createDefaultGrid, createEmptyRow, resizeGridByBars, resizeGridByBeats } from '@/utils'
 
 /**
  * Custom hook for managing sequencer state (grid, bars, beats, BPM)

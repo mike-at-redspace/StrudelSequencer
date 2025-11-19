@@ -3,7 +3,7 @@
  * @module utils/sampleUtils
  */
 
-import { COLOR_MAP, SAMPLE_CATEGORIES } from '../types/constants.js'
+import { COLOR_MAP, SAMPLE_CATEGORIES } from '@/types'
 
 /**
  * Get the Tailwind CSS classes for a sample based on its name

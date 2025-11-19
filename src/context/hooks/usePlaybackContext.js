@@ -5,8 +5,8 @@
  */
 
 import { useContext, useMemo } from 'react'
-import { PlaybackContext } from '../PlaybackContext.js'
-import { usePlaybackState } from '../../hooks/usePlaybackState.js'
+import { PlaybackContext } from '@/context'
+import { usePlaybackState } from '@/hooks'
 import { useSequencer } from './useSequencer.js'
 
 /**

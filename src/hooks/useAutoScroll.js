@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useRef } from 'react'
-import { CONSTANTS } from '../types/constants.js'
+import { CONSTANTS } from '@/types'
 
 /**
  * Custom hook for auto-scrolling to keep the playhead visible

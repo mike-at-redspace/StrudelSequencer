@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { Plus, Minus } from 'lucide-react'
-import { ControlButton } from '../atoms/ControlButton.jsx'
+import { ControlButton } from '@/components'
 import NumberFlow from '@number-flow/react'
 
 /**

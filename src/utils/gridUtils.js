@@ -3,7 +3,7 @@
  * @module utils/gridUtils
  */
 
-import { CONSTANTS } from '../types/constants.js'
+import { CONSTANTS } from '@/types'
 
 /**
  * Create an empty row filled with "-" placeholders

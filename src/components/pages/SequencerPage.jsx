@@ -4,15 +4,14 @@
  */
 
 import { useCallback } from 'react'
-import { Sidebar } from '../organisms/Sidebar.jsx'
-import { ControlBar } from '../organisms/ControlBar.jsx'
-import { SequencerGrid } from '../organisms/SequencerGrid.jsx'
-import { ActiveSampleDisplay } from '../molecules/ActiveSampleDisplay.jsx'
-import { useSequencer } from '../../contexts/hooks/useSequencer.js'
-import { useActiveToolContext } from '../../contexts/hooks/useActiveToolContext.js'
-import { usePlaybackContext } from '../../contexts/hooks/usePlaybackContext.js'
-import { useAutoScroll } from '../../hooks/useAutoScroll.js'
-import { useKeyboardShortcuts } from '../../hooks/useKeyboardShortcuts.js'
+import { Sidebar, ControlBar, SequencerGrid, ActiveSampleDisplay } from '@/components'
+import {
+  useSequencer,
+  useActiveToolContext,
+  usePlaybackContext,
+  useAutoScroll,
+  useKeyboardShortcuts
+} from '@/hooks'
 
 /**
  * Sequencer page component

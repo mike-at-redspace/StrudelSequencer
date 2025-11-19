@@ -6,9 +6,8 @@
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 import { Trash } from 'lucide-react'
-import { ControlGroup } from '../molecules/ControlGroup.jsx'
-import { PlaybackButton } from '../molecules/PlaybackButton.jsx'
-import { CONSTANTS } from '../../types/constants.js'
+import { ControlGroup, PlaybackButton } from '@/components'
+import { CONSTANTS } from '@/types'
 
 /**
  * Control bar organism component

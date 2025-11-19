@@ -6,7 +6,7 @@
  */
 
 import { useContext } from 'react'
-import { ActiveToolContext } from '../contexts/ActiveToolContext.js'
+import { ActiveToolContext } from '@/context'
 
 /**
  * Hook to access active tool state from context

@@ -14,6 +14,8 @@ import { SAMPLE_LIBRARY } from './sampleLibrary.js'
 const SAMPLE_LIBRARY_URL_FALLBACK =
   'https://raw.githubusercontent.com/tidalcycles/Dirt-Samples/refs/heads/master/strudel.json'
 
+let isLoaded = false
+
 /**
  * Load the sample library using bundled configuration
  * Falls back to remote URL if bundled method fails
@@ -27,10 +29,15 @@ const SAMPLE_LIBRARY_URL_FALLBACK =
  * @throws {Error} If both bundled and remote loading fail
  */
 export async function loadSampleLibrary() {
+  if (isLoaded) {
+    return
+  }
+
   try {
     // Primary: Use bundled sample library
     await loadBundledSampleLibrary()
     console.log('Sample library loaded from bundled configuration')
+    isLoaded = true
   } catch (bundledError) {
     console.warn('Bundled sample library failed, attempting remote fallback...', bundledError)
 

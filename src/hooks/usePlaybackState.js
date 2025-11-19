@@ -4,19 +4,15 @@
  */
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { CONSTANTS } from '../types/constants.js'
+import { CONSTANTS } from '@/types'
+import { calculateCPS, calculateStepsPerSecond, calculateCurrentStep } from '@/audio'
 import {
-  calculateCPS,
-  calculateStepsPerSecond,
-  calculateCurrentStep
-} from '../audio/helpers/timingHelpers.js'
-import {
+  resumeAudioContext,
   updateSchedulerPattern,
   startScheduler,
   stopScheduler,
   updateSchedulerCPS
-} from '../audio/scheduler/patternScheduler.js'
-import { resumeAudioContext } from '../audio/engine/audioEngine.js'
+} from '@/audio'
 
 /**
  * Custom hook for managing playback state

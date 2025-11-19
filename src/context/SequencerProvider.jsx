@@ -4,8 +4,8 @@
  */
 
 import PropTypes from 'prop-types'
-import { useSequencerState } from '../hooks/useSequencerState.js'
-import { SequencerContext } from '../contexts/SequencerContext.js'
+import { useSequencerState } from '@/hooks'
+import { SequencerContext } from '@/context'
 
 /**
  * Provider component that wraps the app with sequencer state context

@@ -7,8 +7,8 @@ import { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 import { Plus, Trash2 } from 'lucide-react'
-import { StepCell } from '../atoms/StepCell.jsx'
-import { CONSTANTS } from '../../types/constants.js'
+import { StepCell } from '@/components'
+import { CONSTANTS } from '@/types'
 
 /**
  * Sequencer grid organism component
