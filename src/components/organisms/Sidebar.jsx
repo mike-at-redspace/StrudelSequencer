@@ -43,7 +43,7 @@ export function Sidebar({ activeTool, setActiveTool }) {
                 {IconComponent && <IconComponent size={16} />}
                 {category}
               </h3>
-              <div className="category-grid">
+              <div className="category-grid" role="list">
                 {items.map((sample) => (
                   <SampleButton
                     key={sample.id}

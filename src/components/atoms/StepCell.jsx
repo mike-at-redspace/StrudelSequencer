@@ -45,6 +45,7 @@ function StepCellComponent({ value, isActive, activeTool, onClick, id }) {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
+      e.stopPropagation();
       onClick();
     }
   };

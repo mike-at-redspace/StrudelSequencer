@@ -128,6 +128,7 @@ export function SequencerGrid({
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
+                  e.stopPropagation();
                   onAddTrack();
                 }
               }}

@@ -19,23 +19,23 @@ export function SampleButton({ sampleId, sampleName, isActive, onClick }) {
   const styleClasses = getSampleStyle(sampleId);
 
   return (
-    <div
+    <button
       onClick={onClick}
       className={`sample-button ${styleClasses} ${
         isActive ? 'sample-button-active' : 'sample-button-inactive'
       }`}
       title={`ID: ${sampleId}`}
-      role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
+          e.stopPropagation();
           onClick();
         }
       }}
     >
       {sampleName}
-    </div>
+    </button>
   );
 }
 
