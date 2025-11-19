@@ -1,5 +1,9 @@
 # Strudel Sequencer
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a60f7540-502a-49e3-9d4e-2f1d0c1412ec/deploy-status)](https://app.netlify.com/projects/strudel-sequencer/deploys)
+
+**Live Demo:** [https://strudel-sequencer.netlify.app/](https://strudel-sequencer.netlify.app/)
+
 A step sequencer built with React and [Strudel](https://strudel.cc/) (TidalCycles for the web). Strudel brings the power of [TidalCycles](https://tidalcycles.org/) live coding to the browser.
 
 ## Features
