@@ -51,6 +51,7 @@ export function ControlBar({
           onIncrement={() => adjustBarCount(1)}
           onDecrement={() => adjustBarCount(-1)}
           isPlaying={isPlaying}
+          valueClassName="w-5"
         />
 
         <ControlGroup
@@ -59,6 +60,7 @@ export function ControlBar({
           onIncrement={() => adjustBeatsPerBar(1)}
           onDecrement={() => adjustBeatsPerBar(-1)}
           isPlaying={isPlaying}
+          valueClassName="w-5"
         />
 
         <ControlGroup
