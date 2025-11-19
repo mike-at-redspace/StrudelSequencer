@@ -17,13 +17,7 @@ import PropTypes from 'prop-types';
  */
 export function Button({ children, onClick, disabled = false, className = '', title }) {
   return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={className}
-      title={title}
-      type="button"
-    >
+    <button onClick={onClick} disabled={disabled} className={className} title={title} type="button">
       {children}
     </button>
   );
@@ -36,4 +30,3 @@ Button.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string,
 };
-

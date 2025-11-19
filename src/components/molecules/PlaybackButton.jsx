@@ -29,10 +29,7 @@ export function PlaybackButton({ isPlaying, onClick }) {
           <Play size={16} fill="currentColor" /> PLAY
         </>
       )}
-      <span className="px-1.5 py-0.5 rounded bg-white/10 border border-white/10 font-mono">
-        {' '}
-        ␣
-      </span>
+      <span className="px-1.5 py-0.5 rounded bg-white/10 border border-white/10 font-mono"> ␣</span>
     </button>
   );
 }
@@ -41,4 +38,3 @@ PlaybackButton.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 };
-

@@ -3,6 +3,7 @@
  * @module components/organisms/SequencerGrid
  */
 
+import { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Plus, Trash2 } from 'lucide-react';
 import { StepCell } from '../atoms/StepCell.jsx';
@@ -35,6 +36,32 @@ export function SequencerGrid({
   onRemoveTrack,
   scrollContainerRef,
 }) {
+  const handleCellClick = useCallback(
+    (rowIndex, stepIndex) => {
+      onCellClick(rowIndex, stepIndex);
+    },
+    [onCellClick]
+  );
+
+  const createCellClickHandler = useCallback(
+    (rowIndex, stepIndex) => {
+      return () => handleCellClick(rowIndex, stepIndex);
+    },
+    [handleCellClick]
+  );
+
+  // Memoize handlers map - only recreate when grid structure changes
+  const clickHandlers = useMemo(() => {
+    const handlers = new Map();
+    grid.forEach((row, rowIndex) => {
+      row.forEach((_, stepIndex) => {
+        const key = `${rowIndex}-${stepIndex}`;
+        handlers.set(key, createCellClickHandler(rowIndex, stepIndex));
+      });
+    });
+    return handlers;
+  }, [grid, createCellClickHandler]);
+
   return (
     <div className="flex flex-1 overflow-hidden">
       {/* Track controls column */}
@@ -135,6 +162,8 @@ export function SequencerGrid({
 
                               const cell = row[globalStepIndex];
                               const isActive = currentStep === globalStepIndex;
+                              const handlerKey = `${rowIndex}-${globalStepIndex}`;
+                              const cellClickHandler = clickHandlers.get(handlerKey);
 
                               return (
                                 <StepCell
@@ -142,12 +171,8 @@ export function SequencerGrid({
                                   value={cell}
                                   isActive={isActive}
                                   activeTool={activeTool}
-                                  onClick={() => onCellClick(rowIndex, globalStepIndex)}
-                                  id={
-                                    rowIndex === 0
-                                      ? `step-marker-${globalStepIndex}`
-                                      : undefined
-                                  }
+                                  onClick={cellClickHandler}
+                                  id={rowIndex === 0 ? `step-marker-${globalStepIndex}` : undefined}
                                 />
                               );
                             })}
@@ -175,4 +200,3 @@ SequencerGrid.propTypes = {
   onRemoveTrack: PropTypes.func.isRequired,
   scrollContainerRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
 };
-

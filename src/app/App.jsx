@@ -17,13 +17,8 @@ import { SequencerPage } from '../components/pages/SequencerPage.jsx';
  * @returns {JSX.Element} App element
  */
 function App() {
-  const {
-    isLoaded,
-    hasStarted,
-    scheduler,
-    audioContext,
-    initializeAudio,
-  } = useAudioInitialization();
+  const { isLoaded, hasStarted, scheduler, audioContext, initializeAudio } =
+    useAudioInitialization();
 
   const sequencerState = useSequencerState();
   const { activeTool, setTool, clearTool } = useActiveTool();
@@ -39,16 +34,9 @@ function App() {
     sequencerState.totalSequenceSteps
   );
 
-  const { scrollContainerRef, scrollToStart } = useAutoScroll(
-    playbackState.currentStep,
-    0
-  );
+  const { scrollContainerRef, scrollToStart } = useAutoScroll(playbackState.currentStep, 0);
 
-  useKeyboardShortcuts(
-    hasStarted,
-    playbackState.togglePlayback,
-    clearTool
-  );
+  useKeyboardShortcuts(hasStarted, playbackState.togglePlayback, clearTool);
 
   if (!hasStarted) {
     return <IntroScreen isLoaded={isLoaded} onEnter={initializeAudio} />;
@@ -65,4 +53,3 @@ function App() {
 }
 
 export default App;
-

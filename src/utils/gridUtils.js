@@ -50,7 +50,6 @@ export function createDefaultGrid(barCount, beatsPerBar) {
  * @returns {Array<Array<string>>} Resized grid
  */
 export function resizeGridByBars(grid, oldBars, newBars, stepsPerBar) {
-  const oldTotalSteps = oldBars * stepsPerBar;
   const newTotalSteps = newBars * stepsPerBar;
 
   return grid.map((row) => {
@@ -69,10 +68,11 @@ export function resizeGridByBars(grid, oldBars, newBars, stepsPerBar) {
  * @param {Array<Array<string>>} grid - Current grid
  * @param {number} oldBeats - Previous beats per bar
  * @param {number} newBeats - New beats per bar
- * @param {number} bars - Number of bars
+ * @param {number} _bars - Number of bars (reserved for future use)
  * @returns {Array<Array<string>>} Resized grid
  */
-export function resizeGridByBeats(grid, oldBeats, newBeats, bars) {
+// eslint-disable-next-line no-unused-vars
+export function resizeGridByBeats(grid, oldBeats, newBeats, _bars) {
   const oldStepsPerBar = oldBeats * CONSTANTS.STEPS_PER_BEAT;
   const newStepsPerBar = newBeats * CONSTANTS.STEPS_PER_BEAT;
 
@@ -95,4 +95,3 @@ export function resizeGridByBeats(grid, oldBeats, newBeats, bars) {
     return newChunks.flat();
   });
 }
-

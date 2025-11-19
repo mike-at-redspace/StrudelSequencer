@@ -15,12 +15,7 @@ import PropTypes from 'prop-types';
  */
 export function ControlButton({ children, onClick, isPlaying = false }) {
   return (
-    <button
-      onClick={onClick}
-      className="btn-control"
-      disabled={isPlaying}
-      type="button"
-    >
+    <button onClick={onClick} className="btn-control" disabled={isPlaying} type="button">
       {children}
     </button>
   );
@@ -31,4 +26,3 @@ ControlButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool,
 };
-

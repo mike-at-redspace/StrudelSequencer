@@ -80,4 +80,3 @@ export function stopScheduler(scheduler) {
   }
   scheduler.stop();
 }
-

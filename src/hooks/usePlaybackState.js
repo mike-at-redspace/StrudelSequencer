@@ -5,8 +5,17 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { CONSTANTS } from '../types/constants.js';
-import { calculateCPS, calculateStepsPerSecond, calculateCurrentStep } from '../audio/helpers/timingHelpers.js';
-import { updateSchedulerPattern, startScheduler, stopScheduler, updateSchedulerCPS } from '../audio/scheduler/patternScheduler.js';
+import {
+  calculateCPS,
+  calculateStepsPerSecond,
+  calculateCurrentStep,
+} from '../audio/helpers/timingHelpers.js';
+import {
+  updateSchedulerPattern,
+  startScheduler,
+  stopScheduler,
+  updateSchedulerCPS,
+} from '../audio/scheduler/patternScheduler.js';
 import { resumeAudioContext } from '../audio/engine/audioEngine.js';
 
 /**
@@ -97,19 +106,41 @@ export function usePlaybackState(
   }, [scheduler]);
 
   // Visual playhead synchronization
+  // Use refs to avoid recalculating values on every frame
+  const stepsPerSecondRef = useRef(0);
+  const prevStepRef = useRef(null);
+
+  useEffect(() => {
+    // Pre-calculate steps per second when dependencies change
+    stepsPerSecondRef.current = calculateStepsPerSecond(cyclesPerSecond, stepsPerBar);
+  }, [cyclesPerSecond, stepsPerBar]);
+
   useEffect(() => {
     if (!isPlaying || !audioContext) {
-      setCurrentStep(null);
-      return;
+      // Use setTimeout to avoid calling setState synchronously in effect
+      // This prevents cascading renders and follows React best practices
+      const timeoutId = setTimeout(() => {
+        setCurrentStep(null);
+        prevStepRef.current = null;
+      }, 0);
+      return () => clearTimeout(timeoutId);
     }
 
     const syncVisualStep = () => {
       if (audioContext.state === 'running' && startTime) {
         const now = audioContext.currentTime;
         const elapsed = now - startTime;
-        const stepsPerSecond = calculateStepsPerSecond(cyclesPerSecond, stepsPerBar);
-        const stepIndex = calculateCurrentStep(elapsed, stepsPerSecond, totalSequenceSteps);
-        setCurrentStep((prev) => (prev !== stepIndex ? stepIndex : prev));
+        const stepIndex = calculateCurrentStep(
+          elapsed,
+          stepsPerSecondRef.current,
+          totalSequenceSteps
+        );
+
+        // Only update state if step actually changed
+        if (stepIndex !== prevStepRef.current) {
+          prevStepRef.current = stepIndex;
+          setCurrentStep(stepIndex);
+        }
       }
       requestAnimationFrameId.current = requestAnimationFrame(syncVisualStep);
     };
@@ -120,7 +151,7 @@ export function usePlaybackState(
         cancelAnimationFrame(requestAnimationFrameId.current);
       }
     };
-  }, [isPlaying, startTime, cyclesPerSecond, totalSequenceSteps, stepsPerBar, audioContext]);
+  }, [isPlaying, startTime, totalSequenceSteps, audioContext]);
 
   return {
     isPlaying,
@@ -129,4 +160,3 @@ export function usePlaybackState(
     stopPlayback,
   };
 }
-

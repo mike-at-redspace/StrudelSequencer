@@ -33,4 +33,3 @@ export function calculateStepsPerSecond(cps, stepsPerBar) {
 export function calculateCurrentStep(elapsedTime, stepsPerSecond, totalSteps) {
   return Math.floor(elapsedTime * stepsPerSecond) % totalSteps;
 }
-

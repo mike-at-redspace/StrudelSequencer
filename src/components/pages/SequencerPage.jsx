@@ -3,6 +3,7 @@
  * @module components/pages/SequencerPage
  */
 
+import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Sidebar } from '../organisms/Sidebar.jsx';
 import { ControlBar } from '../organisms/ControlBar.jsx';
@@ -18,12 +19,7 @@ import { ActiveSampleDisplay } from '../molecules/ActiveSampleDisplay.jsx';
  * @param {Object} props.scrollState - Scroll state from useAutoScroll hook
  * @returns {JSX.Element} Sequencer page element
  */
-export function SequencerPage({
-  sequencerState,
-  playbackState,
-  activeToolState,
-  scrollState,
-}) {
+export function SequencerPage({ sequencerState, playbackState, activeToolState, scrollState }) {
   const {
     bars,
     beatsPerBar,
@@ -40,18 +36,22 @@ export function SequencerPage({
   } = sequencerState;
 
   const { isPlaying, currentStep, togglePlayback, stopPlayback } = playbackState;
-  const { activeTool, setTool, clearTool } = activeToolState;
+  const { activeTool, setTool } = activeToolState;
   const { scrollContainerRef, scrollToStart } = scrollState;
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     resetSequencer();
     stopPlayback();
     scrollToStart();
-  };
+  }, [resetSequencer, stopPlayback, scrollToStart]);
 
-  const handleCellClick = (rowIndex, colIndex) => {
-    toggleCellSample(rowIndex, colIndex, activeTool);
-  };
+  // Memoize cell click handler to prevent unnecessary re-renders in SequencerGrid
+  const handleCellClick = useCallback(
+    (rowIndex, colIndex) => {
+      toggleCellSample(rowIndex, colIndex, activeTool);
+    },
+    [toggleCellSample, activeTool]
+  );
 
   return (
     <div className="sequencer-page">
@@ -126,4 +126,3 @@ SequencerPage.propTypes = {
     scrollToStart: PropTypes.func.isRequired,
   }).isRequired,
 };
-

@@ -33,4 +33,3 @@ export function useKeyboardShortcuts(isEnabled, onPlayPause, onClearTool) {
     };
   }, [isEnabled, onPlayPause, onClearTool]);
 }
-

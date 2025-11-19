@@ -5,7 +5,12 @@
 
 import { useState, useCallback } from 'react';
 import { CONSTANTS } from '../types/constants.js';
-import { createDefaultGrid, createEmptyRow, resizeGridByBars, resizeGridByBeats } from '../utils/gridUtils.js';
+import {
+  createDefaultGrid,
+  createEmptyRow,
+  resizeGridByBars,
+  resizeGridByBeats,
+} from '../utils/gridUtils.js';
 
 /**
  * Custom hook for managing sequencer state (grid, bars, beats, BPM)
@@ -43,21 +48,18 @@ export function useSequencerState() {
    * @param {number} colIndex - Column index
    * @param {string|null} activeTool - Currently active tool/sample
    */
-  const toggleCellSample = useCallback(
-    (rowIndex, colIndex, activeTool) => {
-      setGrid((prevGrid) => {
-        const currentCellValue = prevGrid[rowIndex][colIndex];
-        const shouldRemoveSample = currentCellValue === activeTool || !activeTool;
-        const newValue = shouldRemoveSample ? '-' : activeTool;
+  const toggleCellSample = useCallback((rowIndex, colIndex, activeTool) => {
+    setGrid((prevGrid) => {
+      const currentCellValue = prevGrid[rowIndex][colIndex];
+      const shouldRemoveSample = currentCellValue === activeTool || !activeTool;
+      const newValue = shouldRemoveSample ? '-' : activeTool;
 
-        const newGrid = [...prevGrid];
-        newGrid[rowIndex] = [...newGrid[rowIndex]];
-        newGrid[rowIndex][colIndex] = newValue;
-        return newGrid;
-      });
-    },
-    []
-  );
+      const newGrid = [...prevGrid];
+      newGrid[rowIndex] = [...newGrid[rowIndex]];
+      newGrid[rowIndex][colIndex] = newValue;
+      return newGrid;
+    });
+  }, []);
 
   /**
    * Add a new track to the grid
@@ -87,10 +89,7 @@ export function useSequencerState() {
    */
   const adjustBarCount = useCallback(
     (increment) => {
-      const newBars = Math.max(
-        CONSTANTS.MIN_BARS,
-        Math.min(CONSTANTS.MAX_BARS, bars + increment)
-      );
+      const newBars = Math.max(CONSTANTS.MIN_BARS, Math.min(CONSTANTS.MAX_BARS, bars + increment));
       if (newBars === bars) {
         return;
       }
@@ -127,10 +126,7 @@ export function useSequencerState() {
    */
   const adjustBpm = useCallback((increment) => {
     setBpm((prevBpm) => {
-      const newBpm = Math.max(
-        CONSTANTS.MIN_BPM,
-        Math.min(CONSTANTS.MAX_BPM, prevBpm + increment)
-      );
+      const newBpm = Math.max(CONSTANTS.MIN_BPM, Math.min(CONSTANTS.MAX_BPM, prevBpm + increment));
       return newBpm;
     });
   }, []);
@@ -163,4 +159,3 @@ export function useSequencerState() {
     setGrid,
   };
 }
-

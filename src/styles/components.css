@@ -81,8 +81,13 @@
   }
 
   .step-cell-active {
-    @apply z-20 shadow-[0_0_20px_rgba(255,255,255,0.8)] bg-indigo-500/40 ring-2 ring-white/80 brightness-150;
+    @apply z-20 bg-indigo-500/40 brightness-150;
     transform: scale(1.2);
+    /* Use box-shadow for ring effect to ensure it shows even with border classes */
+    /* First shadow creates the white ring, second creates the glow effect */
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(255, 255, 255, 0.8) !important;
   }
 
   .step-cell-filled {

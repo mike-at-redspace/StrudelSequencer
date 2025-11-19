@@ -9,9 +9,10 @@ import { CONSTANTS } from '../types/constants.js';
 /**
  * Custom hook for auto-scrolling to keep the playhead visible
  * @param {number|null} currentStep - Current step index (null if not playing)
- * @param {number} firstRowIndex - Index of the first row (for step marker IDs)
+ * @param {number} _firstRowIndex - Index of the first row (for step marker IDs, reserved for future use)
  */
-export function useAutoScroll(currentStep, firstRowIndex = 0) {
+// eslint-disable-next-line no-unused-vars
+export function useAutoScroll(currentStep, _firstRowIndex = 0) {
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
@@ -50,4 +51,3 @@ export function useAutoScroll(currentStep, firstRowIndex = 0) {
 
   return { scrollContainerRef, scrollToStart };
 }
-

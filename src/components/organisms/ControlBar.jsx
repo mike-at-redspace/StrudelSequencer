@@ -72,12 +72,7 @@ export function ControlBar({
       </div>
 
       <div className="control-bar-actions">
-        <button
-          onClick={resetSequencer}
-          className="btn-reset"
-          title="Reset"
-          type="button"
-        >
+        <button onClick={resetSequencer} className="btn-reset" title="Reset" type="button">
           <Trash size={18} />
         </button>
 
@@ -98,4 +93,3 @@ ControlBar.propTypes = {
   togglePlayback: PropTypes.func.isRequired,
   resetSequencer: PropTypes.func.isRequired,
 };
-

@@ -50,4 +50,3 @@ ControlGroup.propTypes = {
   isPlaying: PropTypes.bool,
   valueClassName: PropTypes.string,
 };
-

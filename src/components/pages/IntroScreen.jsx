@@ -40,4 +40,3 @@ IntroScreen.propTypes = {
   isLoaded: PropTypes.bool.isRequired,
   onEnter: PropTypes.func.isRequired,
 };
-

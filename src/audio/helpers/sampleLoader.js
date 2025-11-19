@@ -21,4 +21,3 @@ export async function loadSampleLibrary() {
     throw new Error('Failed to load sample library. Please check your internet connection.');
   }
 }
-

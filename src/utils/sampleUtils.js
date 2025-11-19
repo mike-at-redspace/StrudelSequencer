@@ -31,4 +31,3 @@ export function getSampleName(id) {
   }
   return id;
 }
-

@@ -147,4 +147,3 @@ export const COLOR_MAP = {
   amencutup: 'bg-orange-600 border-orange-500 text-white',
   hh: 'bg-yellow-400 border-yellow-300 text-yellow-950',
 };
-

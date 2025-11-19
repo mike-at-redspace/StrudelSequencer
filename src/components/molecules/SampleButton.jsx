@@ -4,7 +4,7 @@
  */
 
 import PropTypes from 'prop-types';
-import { getSampleStyle, getSampleName } from '../../utils/sampleUtils.js';
+import { getSampleStyle } from '../../utils/sampleUtils.js';
 
 /**
  * Sample button molecule component
@@ -45,4 +45,3 @@ SampleButton.propTypes = {
   isActive: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };
-

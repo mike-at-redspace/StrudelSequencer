@@ -40,4 +40,3 @@ export async function resumeAudioContext(audioContext) {
     await audioContext.resume();
   }
 }
-

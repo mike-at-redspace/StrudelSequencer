@@ -66,4 +66,3 @@ Sidebar.propTypes = {
   activeTool: PropTypes.string,
   setActiveTool: PropTypes.func.isRequired,
 };
-

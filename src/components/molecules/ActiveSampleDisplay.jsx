@@ -39,4 +39,3 @@ export function ActiveSampleDisplay({ activeTool }) {
 ActiveSampleDisplay.propTypes = {
   activeTool: PropTypes.string,
 };
-
