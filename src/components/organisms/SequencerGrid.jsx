@@ -54,30 +54,31 @@ export function SequencerGrid({
 
   // Animation variants for track rows
   const trackRowVariants = {
-    initial: { opacity: 0, scale: 0.95 },
+    initial: { opacity: 0, scale: 0.98 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.95 }
+    exit: { opacity: 0, scale: 0 }
   }
 
+  // Animation variants for bar containers
   // Animation variants for bar containers
   const barVariants = {
     initial: { opacity: 0, scale: 0.98 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.98 }
+    exit: { opacity: 0, scale: 0 }
   }
 
   // Animation variants for beat containers
   const beatVariants = {
     initial: { opacity: 0, scale: 0.98 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.98 }
+    exit: { opacity: 0, scale: 0 }
   }
 
   // Animation variants for grid rows
   const gridRowVariants = {
-    initial: { opacity: 0, scale: 0.95 },
+    initial: { opacity: 0, scale: 0.98 },
     animate: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.95 }
+    exit: { opacity: 0, scale: 0 }
   }
 
   return (
@@ -161,10 +162,9 @@ export function SequencerGrid({
                   initial='initial'
                   animate='animate'
                   transition={{
-                    delay: barIndex * 0.05,
-                    type: 'spring',
-                    stiffness: 500,
-                    damping: 35
+                    delay: barIndex * 0.01,
+                    duration: 0.01,
+                    ease: 'easeOut'
                   }}
                 >
                   <div className='bar-label'>BAR {barIndex + 1}</div>
@@ -178,7 +178,7 @@ export function SequencerGrid({
                         initial='initial'
                         animate='animate'
                         transition={{
-                          delay: beatIndex * 0.03,
+                          delay: beatIndex * 0.01,
                           type: 'spring',
                           stiffness: 500,
                           damping: 35
@@ -186,15 +186,21 @@ export function SequencerGrid({
                       >
                         {Array(CONSTANTS.STEPS_PER_BEAT)
                           .fill(0)
-                          .map((_, stepIndex) => (
-                            <div key={stepIndex} className='step-marker-container'>
-                              <div
-                                className={`step-marker ${
-                                  stepIndex === 0 ? 'step-marker-beat' : 'step-marker-sub'
-                                }`}
-                              />
-                            </div>
-                          ))}
+                          .map((_, stepIndex) => {
+                            const globalStepIndex =
+                              barIndex * stepsPerBar +
+                              beatIndex * CONSTANTS.STEPS_PER_BEAT +
+                              stepIndex
+                            return (
+                              <div key={stepIndex} className='step-marker-container'>
+                                <div
+                                  id={`step-marker-${globalStepIndex}`}
+                                  className={`step-marker ${stepIndex === 0 ? 'step-marker-beat' : 'step-marker-sub'
+                                    }`}
+                                />
+                              </div>
+                            )
+                          })}
                       </motion.div>
                     ))}
                 </motion.div>
@@ -226,7 +232,7 @@ export function SequencerGrid({
                           initial='initial'
                           animate='animate'
                           transition={{
-                            delay: beatIndex * 0.02,
+                            delay: beatIndex * 0.01,
                             type: 'spring',
                             stiffness: 500,
                             damping: 35
