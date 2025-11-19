@@ -18,16 +18,24 @@ export function useKeyboardShortcuts(isEnabled, onPlayPause, onClearTool) {
     }
 
     const handleGlobalKeydown = e => {
+      // Escape key should always work to clear the tool
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        e.stopPropagation()
+        e.target.blur()
+        onClearTool()
+        return
+      }
+
+      // For other shortcuts, don't trigger if focus is on form elements
       const targetTag = e.target.tagName
       if (['BUTTON', 'INPUT', 'TEXTAREA', 'SELECT'].includes(targetTag)) {
         return
       }
+
       if (e.code === 'Space') {
         e.preventDefault()
         onPlayPause()
-      }
-      if (e.key === 'Escape') {
-        onClearTool()
       }
     }
 
