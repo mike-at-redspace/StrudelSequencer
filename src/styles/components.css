@@ -1,0 +1,403 @@
+/**
+ * Component-level styles using @apply
+ */
+
+@layer components {
+  .btn-control {
+    @apply w-6 h-6 flex items-center justify-center rounded bg-white/10 border border-white/10 text-slate-300 transition;
+
+    &:hover:not(:disabled) {
+      @apply bg-white/20 text-white;
+    }
+
+    &:active:not(:disabled) {
+      @apply scale-95;
+    }
+
+    &:disabled {
+      @apply opacity-50 cursor-not-allowed;
+    }
+  }
+
+  .btn-primary {
+    @apply flex items-center gap-2 px-8 py-2 rounded-full font-bold text-sm transition-all backdrop-blur-md border border-white/20 shadow-lg;
+
+    &:hover {
+      @apply shadow-xl;
+    }
+
+    &:active {
+      @apply scale-95;
+    }
+  }
+
+  .btn-primary-play {
+    @apply flex items-center gap-2 px-8 py-2 rounded-full font-bold text-sm transition-all backdrop-blur-md border border-white/20 shadow-lg bg-emerald-500/90 text-white shadow-emerald-900/40;
+
+    &:hover {
+      @apply shadow-xl bg-emerald-500;
+    }
+
+    &:active {
+      @apply scale-95;
+    }
+  }
+
+  .btn-primary-stop {
+    @apply flex items-center gap-2 px-8 py-2 rounded-full font-bold text-sm transition-all backdrop-blur-md border border-white/20 shadow-lg bg-red-500/90 text-white shadow-red-900/40;
+
+    &:hover {
+      @apply shadow-xl bg-red-500;
+    }
+
+    &:active {
+      @apply scale-95;
+    }
+  }
+
+  .panel-glass {
+    @apply bg-slate-950/80 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+
+  .panel-glass-light {
+    @apply bg-slate-950/60 backdrop-blur-md border border-white/10;
+  }
+
+  .panel-glass-medium {
+    @apply bg-slate-950/70 backdrop-blur-3xl border border-white/10 shadow-2xl;
+  }
+
+  .sample-button {
+    @apply px-2 py-2 rounded text-xs font-bold text-center cursor-pointer hover:scale-105 transition-transform border-b-2 shadow-lg;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .sample-button-active {
+    @apply ring-2 ring-white scale-105 brightness-110 z-10;
+  }
+
+  .step-cell {
+    @apply w-full h-full rounded-sm flex items-center justify-center relative backdrop-blur-sm transition-all duration-75;
+  }
+
+  .step-cell-active {
+    @apply z-20 shadow-[0_0_20px_rgba(255,255,255,0.8)] bg-indigo-500/40 ring-2 ring-white/80 brightness-150;
+    transform: scale(1.2);
+  }
+
+  .step-cell-filled {
+    @apply border-b-4 border-white/20;
+  }
+
+  .step-cell-empty {
+    /* Empty state - hover handled via parent selector */
+  }
+
+  .step-cell-container.group:hover .step-cell-empty {
+    @apply bg-white/10;
+  }
+
+  .control-group {
+    @apply flex items-center gap-3 bg-black/20 px-3 py-1.5 rounded-lg border border-white/5;
+  }
+
+  .control-label {
+    @apply text-xs font-bold text-slate-400;
+  }
+
+  .control-value {
+    @apply text-center font-bold text-white text-base;
+  }
+
+  .scrollbar-custom {
+    @apply scroll-smooth;
+
+    &::-webkit-scrollbar {
+      @apply h-3.5 w-3.5;
+    }
+
+    &::-webkit-scrollbar-track {
+      @apply bg-slate-900 rounded-lg m-2;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      @apply bg-slate-600 rounded-lg border-2 border-slate-900;
+
+      &:hover {
+        @apply bg-slate-500;
+      }
+    }
+  }
+
+  /* ControlBar */
+  .control-bar {
+    @apply h-16 flex-none border-b border-white/10 bg-slate-950/60 backdrop-blur-md border border-white/10 flex items-center justify-between px-6 z-20;
+  }
+
+  .control-bar-content {
+    @apply font-mono text-sm text-slate-300 flex gap-6 items-center;
+  }
+
+  .control-bar-actions {
+    @apply flex items-center gap-4;
+  }
+
+  .btn-reset {
+    @apply p-2 rounded-full text-slate-300 transition border border-transparent;
+
+    &:hover {
+      @apply text-white bg-white/10 border-white/10;
+    }
+  }
+
+  /* Sidebar */
+  .sidebar-header {
+    @apply p-5 border-b border-white/10 bg-white/5;
+  }
+
+  .sidebar-title {
+    @apply font-bold text-white text-lg flex items-center gap-2 tracking-tight;
+  }
+
+  .sidebar-subtitle {
+    @apply text-xs text-slate-400 mt-1;
+  }
+
+  .sidebar-content {
+    @apply flex-1 overflow-y-auto p-4 space-y-6 scroll-smooth;
+  }
+
+  .category-title {
+    @apply text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2;
+  }
+
+  .category-grid {
+    @apply grid grid-cols-2 gap-2;
+  }
+
+  .sample-button-inactive {
+    @apply opacity-90;
+
+    &:hover {
+      @apply opacity-100;
+    }
+  }
+
+  /* SequencerGrid */
+  .track-controls {
+    @apply flex-none w-14 bg-white/5 border-r border-white/10 z-20 flex flex-col;
+  }
+
+  .track-controls-header {
+    @apply h-10 border-b border-white/10 bg-white/5;
+  }
+
+  .track-controls-content {
+    @apply flex-1 overflow-hidden;
+  }
+
+  .track-row {
+    @apply h-14 border-b border-white/5 flex justify-center items-center;
+  }
+
+  .btn-remove-track {
+    @apply text-slate-500 transition opacity-0;
+
+    &:hover {
+      @apply text-red-400;
+    }
+  }
+
+  .track-row:hover .btn-remove-track {
+    @apply opacity-100;
+  }
+
+  .btn-add-track-container {
+    @apply h-14 flex justify-center items-center border-t border-dashed border-white/10 bg-white/5 transition cursor-pointer;
+
+    &:hover {
+      @apply bg-white/10;
+    }
+  }
+
+  .btn-add-track {
+    @apply text-slate-400 transition;
+
+    &:hover {
+      @apply text-white;
+    }
+  }
+
+  .grid-container {
+    @apply flex-1 overflow-auto scroll-smooth relative;
+  }
+
+  .grid-content {
+    @apply min-w-max pb-8;
+  }
+
+  .grid-header {
+    @apply flex h-10 sticky top-0 z-10 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 pl-2 shadow-md;
+  }
+
+  .bar-container {
+    @apply flex items-end relative pl-2 border-l border-white/10 first:border-l-0 mr-4 last:mr-0;
+  }
+
+  .bar-label {
+    @apply absolute top-1 left-2 text-[10px] font-mono text-slate-400 font-bold tracking-widest;
+  }
+
+  .beat-container {
+    @apply flex mr-0.5 last:mr-0;
+  }
+
+  .step-marker-container {
+    @apply w-8 flex justify-center pb-1.5;
+  }
+
+  .step-marker {
+    @apply w-1 h-1 rounded-full;
+  }
+
+  .step-marker-beat {
+    @apply bg-slate-400;
+  }
+
+  .step-marker-sub {
+    @apply bg-slate-700;
+  }
+
+  .grid-row {
+    @apply flex h-14 border-b border-white/5 pl-2 transition-colors;
+
+    &:hover {
+      @apply bg-white/5;
+    }
+  }
+
+  .bar-cell {
+    @apply flex relative pl-2 border-l border-white/5 first:border-l-0 mr-4 last:mr-0;
+  }
+
+  /* StepCell */
+  .step-cell-container {
+    @apply w-8 h-full py-1.5 relative;
+
+    &:hover .step-cell-empty-dot {
+      @apply bg-white/50;
+    }
+  }
+
+  .step-cell-empty-dot {
+    @apply w-1 h-1 bg-white/10 rounded-full;
+  }
+
+  .step-cell-hover {
+    &:hover {
+      @apply brightness-110 scale-105;
+    }
+  }
+
+  /* ActiveSampleDisplay */
+  .active-sample-hud {
+    @apply absolute bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none;
+  }
+
+  .active-sample-content {
+    @apply bg-slate-900/90 backdrop-blur text-white px-4 py-2 rounded-full border border-white/20 shadow-xl flex items-center gap-3;
+    animation:
+      slideInFromBottom 0.3s ease-out,
+      fadeIn 0.3s ease-out;
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .active-sample-indicator {
+    @apply w-3 h-3 rounded-full animate-pulse;
+  }
+
+  .active-sample-text {
+    @apply text-sm font-medium;
+  }
+
+  .active-sample-divider {
+    @apply h-4 w-px bg-white/20;
+  }
+
+  .active-sample-hint {
+    @apply text-xs text-slate-400 flex items-center gap-1;
+  }
+
+  .key-badge {
+    @apply px-1.5 py-0.5 rounded bg-white/10 border border-white/10 font-mono;
+  }
+
+  /* IntroScreen */
+  .intro-container {
+    @apply min-h-screen flex items-center justify-center text-white font-sans;
+  }
+
+  .intro-card {
+    @apply text-center p-12 rounded-3xl backdrop-blur-xl bg-slate-950/60 border border-white/10 shadow-2xl;
+  }
+
+  .intro-title {
+    @apply text-5xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200;
+  }
+
+  .intro-title-text {
+    @apply text-white;
+  }
+
+  .intro-loading {
+    @apply text-blue-200 animate-pulse font-mono;
+  }
+
+  .btn-enter-studio {
+    @apply relative bg-white/10 backdrop-blur-md text-white font-bold py-4 px-12 rounded-full text-xl shadow-[0_0_30px_rgba(255,255,255,0.2)] border border-white/20 transition-all;
+
+    &:hover {
+      @apply bg-white/20 scale-105;
+    }
+  }
+
+  .btn-enter-studio-content {
+    @apply flex items-center gap-2;
+  }
+
+  /* SequencerPage */
+  .sequencer-page {
+    @apply h-screen flex overflow-hidden text-slate-200 font-sans;
+  }
+
+  .sequencer-main {
+    @apply flex-1 flex flex-col min-w-0 relative;
+  }
+
+  .sequencer-content-wrapper {
+    @apply flex-1 overflow-hidden flex flex-col p-6;
+  }
+
+  .sequencer-panel {
+    @apply rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-1 flex-col relative;
+  }
+}
